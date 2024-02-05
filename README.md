@@ -1,5 +1,23 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# TODO
+
+- Add a metadata and SEO to page and blog posts
+- Add a favicon
+- Add a sitemap
+- design the pages and themes.
+- https://dribbble.com/shots/23563106--blog
+- https://dribbble.com/shots/18432052-Framer-Template-Blog
+- fix light and dark mode for hightlight.js
+- make script for quickly generaiting a new blog posts
+- add a contact form
+- add about me page
+- what are some useful social links
+- copy button for code blocks.
+- tool for embeding iframes of figma designs.
+https://www.figma.com/developers/embed
+https://www.sketch.com/docs/sharing-and-collaborating/sharing-and-viewing-documents/embedding-sketch-documents/
+
 ## Getting Started
 
 First, run the development server:
