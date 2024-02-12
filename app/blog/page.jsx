@@ -2,9 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-import Link from "next/link";
 
 import Header from "../../components/header";
+import BlogList from "@/components/BlogList";
 
 export default function Blog() {
   const postDirectory = "posts";
@@ -30,39 +30,19 @@ export default function Blog() {
     })
     .sort((a, b) => b.date - a.date);
 
-  // TODO: Add hover effect to blog list links
-  // TODO: Add Blog post Page Styling and navigation.
-  // TODO: Add soical share buttons.
+  // TODO: Add Blog post navigation arrows and keys.
+  // TODO: make hitting enter on blog page goes to latest post.
+  // TODO: Make hitting J and K go to previous and next blog posts.
+  // TODO: Make hitting H and L go to next 'tab' (about, projects, blog)
+  // TODO: Add social share buttons?
   // TODO: Add SEO meta tags.
-  // TODO: Make clicking on name/title take home
+  // TODO: Dark Mode
   // TODO: Add Project Pages
-
   return (
     <>
       <Header activePage="blog" />
       <section>
-        <ol className="flex flex-col space-y-3 pt-8">
-          {blogs.map((blog) => {
-            const options = { year: "numeric", month: "long", day: "2-digit" };
-            const formattedDate = blog.date.toLocaleDateString(
-              "en-US",
-              options,
-            );
-            return (
-              <Link
-                href={`/blog/${blog.slug}`}
-                className="flex flex-row space-x-8 border-b border-transparent hover:border-neutral-300"
-              >
-                <span className="font-light w-60 text-xl font-mono text-neutral-500">
-                  {formattedDate}
-                </span>
-                <span className="text-neutral-500 text-xl">
-                  {blog.meta.title}
-                </span>
-              </Link>
-            );
-          })}
-        </ol>
+        <BlogList blogs={blogs} />
       </section>
     </>
   );

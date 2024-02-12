@@ -8,6 +8,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import Header from "@/components/Header";
 
 const options = {
   mdxOptions: {
@@ -17,12 +18,10 @@ const options = {
 };
 
 export async function generateStaticParams() {
-  console.log("Generating static paths");
+  console.log("!!!! Generating static paths");
   const files = fs.readdirSync(path.join("posts"));
   const paths = files.map((filename) => ({
-    params: {
-      slug: filename.replace(".mdx", ""),
-    },
+    slug: filename.replace(".mdx", ""),
   }));
   console.log("Generated static paths", paths);
 
@@ -52,10 +51,13 @@ export default function Page({ params }) {
   const props = getPost(params);
 
   return (
-    <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto">
-      <h1>{props.frontMatter.title}</h1>
+    <>
+      <Header activePage="blog" />
+      <article className="prose prose-sm md:prose-base lg:2xl prose-slate">
+        <h1 className="pt-8 font-bold">{props.frontMatter.title}</h1>
 
-      <MDXRemote source={props.content} options={options} />
-    </article>
+        <MDXRemote source={props.content} options={options} />
+      </article>
+    </>
   );
 }

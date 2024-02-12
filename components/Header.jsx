@@ -9,13 +9,16 @@ export default function Header({ activePage }) {
       : "hover:text-neutral-700 hover:font-medium";
   };
 
+  const linkCss = "hover:text-neutral-700 hover:font-medium hover:bg-neutral-100 rounded border-transparent p-1";
+
   return (
     <div>
-      <h1 className="text-neutral-900 text-3xl font-bold">💻 Andrew Paxson</h1>
-      <span className="text-neutral-500 text-lg font-light">
-        Product Designer | Software Engineer
-      </span>
-
+      <Link href="/">
+        <h1 className="text-neutral-900 text-3xl font-bold">💻 Andrew Paxson</h1>
+        <span className="text-neutral-500 text-lg font-light">
+          Product Designer | Software Engineer
+        </span>
+      </Link>
       <div className="flex justify-between items-center border-b border-b-neutral-300 pb-3">
         <nav className="flex space-x-3 text-neutral-500 pt-12 text-lg font-light">
           <Link href="/">
@@ -33,19 +36,19 @@ export default function Header({ activePage }) {
           {/* Example social links */}
           <Link
             href="https://twitter.com"
-            className="hover:text-neutral-700 hover:font-medium"
+            className={linkCss}
           >
             <X />
           </Link>
           <Link
             href="https://github.com"
-            className="hover:text-neutral-700 hover:font-medium"
+            className={linkCss}
           >
             <GithubCircle />
           </Link>
           <Link
             href="https://linkedin.com"
-            className="hover:text-neutral-700 hover:font-medium"
+            className={linkCss}
           >
             <Linkedin />
           </Link>
