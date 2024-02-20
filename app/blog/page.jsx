@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 import Link from "next/link";
 
-import Header from "@/components/header";
+import Header from "@/components/Header";
 
 export default function Blog() {
   const postDirectory = "posts";
