@@ -37,13 +37,16 @@ export default function Header({ activePage }) {
 
         <div className="flex space-x-3 text-neutral-500 text-sm sm:text-lg font-light">
           {/* Example social links */}
-          <Link href="https://twitter.com" className={linkCss}>
+          <Link href="https://twitter.com/MrPaxson" className={linkCss}>
             <X />
           </Link>
-          <Link href="https://github.com" className={linkCss}>
+          <Link href="https://github.com/paxsonsa" className={linkCss}>
             <GithubCircle />
           </Link>
-          <Link href="https://linkedin.com" className={linkCss}>
+          <Link
+            href="https://www.linkedin.com/in/andrewpaxson"
+            className={linkCss}
+          >
             <Linkedin />
           </Link>
         </div>
