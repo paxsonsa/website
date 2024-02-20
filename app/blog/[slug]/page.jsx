@@ -55,6 +55,7 @@ export default function Page({ params }) {
       <Header activePage="blog" />
       <article className="prose prose-sm md:prose-base lg:2xl prose-slate">
         <h1 className="pt-8 font-bold">{props.frontMatter.title}</h1>
+        <meta name="description" content={props.frontMatter.description} />
 
         <MDXRemote source={props.content} options={options} />
       </article>
