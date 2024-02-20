@@ -30,9 +30,6 @@ export default function Blog() {
     })
     .sort((a, b) => b.date - a.date);
 
-  // TODO: Add SEO meta tags.
-  // TODO: Dark Mode
-  // TODO: Add Project Pages
   return (
     <>
       <Header activePage="blog" />
@@ -55,7 +52,7 @@ function BlogList({ blogs }) {
   today.setHours(0, 0, 0, 0); // Set time to 00:00:00 to compare only by date, not time
 
   return (
-    <ol className="flex flex-col space-y-3 pt-8">
+    <ol className="flex flex-col space-y-8 sm:space-y-4 pt-8">
       {blogs.map((blog) => {
         const options = { year: "numeric", month: "short", day: "2-digit" };
         const formattedDate = blog.date.toLocaleDateString("en-US", options);
@@ -66,14 +63,14 @@ function BlogList({ blogs }) {
         return (
           <Link
             href={`/blog/${blog.slug}`}
-            className={`group flex flex-row space-x-8 text-neutral-600`}
+            className={`group flex flex-col-reverse sm:flex-row sm:space-y-0 sm:space-x-8 text-neutral-600`}
           >
-            <span className="font-light w-50 text-l font-mono text-neutral-500 group-hover:text-neutral-800 dark:text-zinc-400 dark:group-hover:text-zinc-300">
+            <span className="font-light w-50 text-l font-mono text-neutral-500 group-hover:text-neutral-800 flex-nowrap dark:text-zinc-400 dark:group-hover:text-zinc-300">
               {formattedDate}
             </span>
-            <span className="text-neutral-600 text-l font-medium group-hover:text-neutral-800 dark:text-zinc-300 dark:group-hover:text-zinc-100">
+            <h3 className="text-neutral-600 text-xl sm:text-l font-medium group-hover:text-neutral-800 dark:text-zinc-300 dark:group-hover:text-zinc-100">
               {blog.meta.title}
-            </span>
+            </h3>
           </Link>
         );
       })}

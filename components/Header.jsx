@@ -22,8 +22,8 @@ export default function Header({ activePage }) {
           Product Designer | Software Engineer
         </span>
       </Link>
-      <div className="flex justify-between items-center border-b border-b-neutral-300 dark:border-b-zinc-400 pb-3">
-        <nav className="flex space-x-3 dark:text-zinc-300 text-neutral-500 pt-12 text-lg font-light">
+      <div className="flex flex-row justify-between items-center border-b border-b-neutral-300 pt-8 dark:border-b-zinc-400 pb-3 ">
+        <nav className="flex space-x-3 dark:text-zinc-300 text-neutral-500 text-lg font-light ">
           <Link href="/">
             <span className={`${isActive("about")}`}>about</span>
           </Link>
@@ -35,7 +35,7 @@ export default function Header({ activePage }) {
           </Link>
         </nav>
 
-        <div className="flex space-x-3 text-neutral-500 pt-12 text-lg font-light">
+        <div className="flex space-x-3 text-neutral-500 text-sm sm:text-lg font-light">
           {/* Example social links */}
           <Link href="https://twitter.com" className={linkCss}>
             <X />
