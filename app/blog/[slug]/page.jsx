@@ -42,6 +42,7 @@ export async function generateMetadata({ params }) {
   const blog = getPost(params);
   return {
     title: blog.frontMatter.title,
+    author: "Andrew Paxson @MrPaxson",
     description: blog.frontMatter.description,
   };
 }
@@ -50,11 +51,19 @@ export default function Page({ params }) {
   console.log(params);
   const props = getPost(params);
 
+  const date = new Date(props.frontMatter.date);
+  const options = { year: "numeric", month: "short", day: "2-digit" };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+
   return (
     <>
       <Header activePage="blog" />
-      <article className="prose prose-sm md:prose-base lg:2xl prose-slate">
+      <article className="prose prose-sm md:prose-base lg:2xl prose-neutral dark:prose-invert">
         <h1 className="pt-8 font-bold">{props.frontMatter.title}</h1>
+        <div className="flex-row space-x-4 text-mono">
+          <span classNmae="text-md font-bold">{formattedDate}</span>
+          <span classNmae="text-md font-bold">By: Andrew Paxson</span>
+        </div>
         <meta name="description" content={props.frontMatter.description} />
 
         <MDXRemote source={props.content} options={options} />
