@@ -1,0 +1,39 @@
+---
+title: Why hasn't cloud for VFX taken off?
+date: '2023-11-20'
+description: "Anybody who dared venture to a VFX conference over the last few years knows the cloud companies have been driving hard to get a piece of the VFX pie. But why hasn't it taken off?"
+hidden: true
+---
+
+When ever I am at a developer conference networking with peers there is the inevitable question of "which cloud are you using?" and the answer is always a resounding "none" which is usually followed with an incredulous look and sometimes a sense of pity. It does not bother me,
+but it has made me wonder why the VFX industry has not taken to the cloud as much as other industries.
+
+VFX is not the only niche industry that has not taken to the cloud but it is one that, on its surface, seems like it should be a perfect fit; We have burstable workloads of high volume computing that require the latest and great hardware, our workloads are elastic and we have a global footprint. How many more buzz words do you need? Well, you are not alone, the cloud companies for many years have been anything but subtle in there pursuit of the those delicious VFX compute hours but after many years of trying, a "cloud based" VFX platform is still out of reach.
+
+## The reality of elastic workloads
+- Long running jobs are not elastic
+- Scheduling and bin packing is an entire genre of computer science
+- Our workloads are relatively predictable
+- Cloud is not built for really long runnning intensive jobs
+
+## Good old NFS
+- Its big and bulky but its stable
+- Our data is massive and highly available
+- Our software is not cloud native
+## The DCC shoe just doesn't fit in the cloud.
+- Licensing is a limiting factor
+- Pipeline code is finicky
+- 
+## We ain't got the money.
+- Opex vs Capex Risks
+- Cloud is $$$$
+- I getting data in and out is expensive.
+- Our users can need something they can abuse with little cost.
+
+## The cloud industry is missing an opportunity
+- We have huge IO loads and large CPU loads that are predictable.
+- We have a need for global data transfers to NFS
+- Figuring our how to make an artists life easier through distributed computing is a huge opportunity.
+- Figuring out how to make the Capex vs Opex argument work for us is a huge opportunity.
+- We really need another render farm scheduler.
+- NFS reins supreme but a better solution is needed but it has to be something we can evolve into.

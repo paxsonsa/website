@@ -28,6 +28,9 @@ export default function Blog() {
         slug: filename.replace(".mdx", ""),
       };
     })
+    .filter(
+      (blog) => !blog.meta.hidden || process.env.NODE_ENV === "development",
+    )
     .sort((a, b) => b.date - a.date);
 
   return (
