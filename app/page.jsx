@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Header from "../components/Header";
+import { GithubCircle, Linkedin, X } from "iconoir-react";
 
 export default function Home() {
   const skills = [
@@ -29,51 +30,103 @@ export default function Home() {
 
   return (
     <>
-      <Header activePage="about" />
-      <section>
-        <h1 className="text-neutral-800 dark:text-zinc-100 font-bold text-2xl pt-8">
-          <span className="pr-4">👋🏻</span>Hi, I'm Andrew
-        </h1>
-        <h2 className="text-neutral-700 dark:text-zinc-200 text-lg font-medium pt-4">
-          I like to build things that empower creativity
-        </h2>
-        <p className="dark:text-zinc-300 pt-8">
-          I am a Product Designer with over a decade of experience crafting
-          tools and systems for creative teams. I am currently working as a
-          Staff Engineer at Industrial Light & Magic, where I have led the
-          design and engineering of multiple products that enhance creative
-          workflows and developer experience. I have unique skillset as designer
-          having built large services from the ground up, designed and
-          maintained developer platforms, and created UIs and systems for
-          artists. This gives me the ability to take a product from conception
-          to full deployment and evolution by being a individual contributor in
-          every part of a project. My approach is to create product experiences
-          that get out of the way of the users by focusing on designing useful
-          solutions that empower the creative process. My current role involves
-          leading a team of engineers and designers, interacting with users and
-          leadership teams, and driving the design and engineering of our global
-          creative processes and systems. Outside of work, I am passionate about
-          astrophotography, a fervent supporter of Liverpool FC (#YNWA), and
-          take great pride in being a husband and father. I am always open for
-          new opportunities and networking! Feel free to reach out to me on
-          social!
-        </p>
-        <h2 className="text-neutral-700 dark:text-zinc-100 text-lg pt-8 font-medium">
-          Skills and Knowledge
-        </h2>
-        <p className="text-sm pt-2 pb-4 dark:text-zinc-200">
-          Everything listed I have direct production experience and expertise
-          with.
-        </p>
-        {skills.map((skill) => (
-          <span>
-            <span className="border border-transparent hover:border-b-neutral-500 dark:text-zinc-300">
-              {skill}
-            </span>
-            <span>{", "}</span>
-          </span>
-        ))}
+      <section className="flex flex-col items-center p-8 my-2 md:mt-8">
+        <div className="flex flex-col items-center m-auto text-neutral-900">
+          <h1 className="text-4xl text-center font-bold">
+            Hello,{"  "}I'm Andrew!
+          </h1>
+          <h2 className="font-light text-xl p-4 text-neutral-700">
+            Product Designer | Engineer
+          </h2>
+          <div className="flex space-x-4 pt-2">
+            <Link
+              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 rounded"
+              href="https://twitter.com/MrPaxson"
+            >
+              <X />
+            </Link>
+            <Link
+              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 rounded"
+              href="https://github.com/paxsonsa"
+            >
+              <GithubCircle />
+            </Link>
+            <Link
+              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 rounded"
+              href="https://www.linkedin.com/in/andrewpaxson"
+            >
+              <Linkedin />
+            </Link>
+          </div>
+        </div>
       </section>
+      <div className="md:justify-center md:items-start md:max-w-screen-md md:m-auto">
+        <Section
+          title="I build products that help creative teams be better."
+          content={
+            <>
+              I'm a product designer and software engineer with over a decade
+              experience building things for creative teams. I am currently a
+              Staff Engineer at{" "}
+              {
+                <Link
+                  className="font-semibold hover:underline"
+                  href="https://ilm.com"
+                >
+                  Industrial Light & Magic
+                </Link>
+              }
+              , where I have led the design and engineering of multiple products
+              that improve creative workflows and teams by making them more
+              collaborative, global, and focused on what they do best, creating.
+            </>
+          }
+        />
+        ``
+        <Section
+          title="Experience building from concept to deployment"
+          content={
+            <>
+              I have a unqiue skillset and experience as a designer doubling as
+              a software engineer. I have designed and written low-level systems
+              such as software build, distribution and packaging systems to
+              higher level tooling for creative workflows and UIs for artists.
+              This has given me the ability to take a product from conception to
+              full deployment and evolution by directly participating the entire
+              process from top to bottom; This includes getting my hands dirty
+              with code, coordinating infrastruture, strategy and business
+              design with leadership, and interacting with users and
+              stakeholders to ensure the product is always exactly what they
+              need.
+            </>
+          }
+        />
+        <Section
+          title="I lead global teams to succcess"
+          content={
+            <>
+              I am responsible for leading a small global team of engineers and
+              designers to build and maintain a critical suite of products that
+              are used by artists and production teams to share and manage data
+              (images, 3D models, files, etc) across the globe. This requires me
+              communicate and coordinate with a large number stakeholders to
+              ensure our product suite is always meeting the needs of the studio
+              and artists.
+            </>
+          }
+        />
+      </div>
     </>
+  );
+}
+
+function Section({ title, content }) {
+  return (
+    <section className="flex flex-col justify-center text-center items-center m-y-2 flex-1">
+      <div className="flex flex-col justify-center items-center m-auto p-8 space-y-4">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-lg">{content}</p>
+      </div>
+    </section>
   );
 }
