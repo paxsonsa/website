@@ -4,55 +4,31 @@ import Header from "../components/Header";
 import { GithubCircle, Linkedin, X } from "iconoir-react";
 
 export default function Home() {
-  const skills = [
-    "Product Design",
-    "Systems Design",
-    "3D & Realtime Graphics",
-    "Visual Effects & Animation",
-    "Platform Systems (Software Distribution, Packaging Systems, Release/Testing)",
-    "Distributed Systems (Event Sourcing, CQRS, Multi-DC, Rendering, ETL)",
-    "Fullstack",
-    "Kubernetes",
-    "Hybrid Cloud",
-    "Python",
-    "Rust",
-    "Golang",
-    "Swift",
-    "C/C++",
-    "Elixir",
-    "Javascript/Typescript",
-    "Postgres/MySQL",
-    "Redis",
-    "ScyllaDB",
-    "Elasticsearch",
-    "Ansible",
-  ];
-
   return (
     <>
       <section className="flex flex-col items-center p-8 my-2 md:mt-8">
-        <div className="flex flex-col items-center m-auto text-neutral-900">
+        <div className="flex flex-col items-center m-auto text-neutral-900 dark:text-white">
           <h1 className="text-4xl text-center font-bold">
             Hello,{"  "}I'm Andrew!
           </h1>
-          <h2 className="font-light text-xl p-4 text-neutral-700">
+          <h2 className="font-light text-xl p-4 text-neutral-700 dark:text-neutral-200 dark:font-medium">
             Product Designer | Engineer
           </h2>
           <div className="flex space-x-4 pt-2">
             <Link
-              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 rounded"
+              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 dark:text-neutral-400 dark:hover:bg-neutral-800 rounded"
               href="https://twitter.com/MrPaxson"
             >
               <X />
             </Link>
             <Link
-              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 rounded"
+              className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"
               href="https://github.com/paxsonsa"
             >
               <GithubCircle />
             </Link>
             <Link
-              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 rounded"
+              className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"
               href="https://www.linkedin.com/in/andrewpaxson"
             >
               <Linkedin />
@@ -124,8 +100,12 @@ function Section({ title, content }) {
   return (
     <section className="flex flex-col justify-center text-center items-center m-y-2 flex-1">
       <div className="flex flex-col justify-center items-center m-auto p-8 space-y-4">
-        <h3 className="text-xl font-semibold">{title}</h3>
-        <p className="text-lg">{content}</p>
+        <h3 className="text-xl font-semibold dark:font-bold dark:text-neutral-50">
+          {title}
+        </h3>
+        <p className="text-lg dark:font-light dark:text-neutral-100">
+          {content}
+        </p>
       </div>
     </section>
   );

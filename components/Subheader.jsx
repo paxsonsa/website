@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Subheader({ title, href }) {
   return (
-    <div className="justify-center border-b border-b-neutral-200 p-4 md:px-8">
+    <div className="justify-center border-b border-b-neutral-200 dark:text-neutral-200 dark:bg-neutral-900 dark:border-b-neutral-700 p-2 md:px-8">
       <nav className="flex justify-center md:justify-start md:max-w-screen-lg md:justify-start m-auto">
-        <Link className="text-lg font-semibold" href={href}>
+        <Link className="text-xl font-semibold" href={href}>
           {title}
         </Link>
       </nav>

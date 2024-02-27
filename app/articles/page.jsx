@@ -72,17 +72,19 @@ function ArticleList({ articles }) {
             className="px-4 md:px-0 pt-4 pb-24 md:pb-8 md:border-b border-b-neutral-200 last:border-transparent"
           >
             <Link
-              className="text-2xl hover:underline"
+              className="text-2xl hover:underline dark:font-medium"
               href={`/articles/${article.slug}`}
             >
               <h2>{article.meta.title}</h2>
             </Link>
-            <h3 className="text-sm text-neutral-500 mt-1">{formattedDate}</h3>
+            <h3 className="text-sm text-neutral-500 mt-1 dark:text-neutral-400">
+              {formattedDate}
+            </h3>
             <HeroImage imageUrl={article.meta.image} />
             <p className="pr-16 my-4">{article.meta.description}</p>
             <Link
               href={`/articles/${article.slug}`}
-              className="text-sky-500 font-medium text-sm hover:underline"
+              className="text-sky-500 dark:text-sky-400 dark:font-normal font-medium text-sm hover:underline"
             >
               Read More
             </Link>

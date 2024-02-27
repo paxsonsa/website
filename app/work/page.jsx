@@ -12,7 +12,7 @@ export default function Projects() {
     <>
       <Subheader title="Projects and Work" href="/work" />
       <section className="flex flex-col text-center p-4 mt-16">
-        <h1 className="text-neutral-800 dark:text-zinc-100 text-2xl font-semibold m-auto">
+        <h1 className="text-neutral-800 dark:text-neutral-50 text-2xl font-semibold m-auto">
           Sorry, still working on sharing my latest work!
         </h1>
         <p className="pt-2 m-auto">

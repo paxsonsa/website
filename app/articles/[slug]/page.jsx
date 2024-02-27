@@ -61,19 +61,21 @@ export default function Page({ params }) {
   return (
     <>
       <Subheader title="Articles & Posts" href="/articles" />
-      <div className="bg-white justify-center p-4 pb-16 border-b border-b-neutral-200">
+      <div className="bg-white dark:bg-black justify-center p-4 pb-16 border-b border-b-neutral-200">
         <article className="max-w-screen-md m-auto pt-8">
           <meta name="description" content={props.frontMatter.description} />
-          <h2 className="text-2xl">{props.frontMatter.title}</h2>
-          <h3 className="text-sm text-neutral-500 mt-1">{formattedDate}</h3>
+          <h2 className="text-2xl font-medium">{props.frontMatter.title}</h2>
+          <h3 className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+            {formattedDate}
+          </h3>
           <HeroImage imageUrl={props.frontMatter.image} />
-          <div className="prose">
+          <div className="prose prose-neutral dark:prose-invert dark:prose-p:text-neutral-50">
             <MDXRemote source={props.content} options={options} />
           </div>
         </article>
         <div className="md:max-w-screen-md flex justify-start my-8 space-x-8 m-auto">
           <Link
-            className="hover:underline rounded text-sky-500 font-semibold"
+            className="hover:underline rounded text-sky-500 dark:text-sky-400 dark:hover:no-underline dark:hover:text-sky-500 font-semibold"
             href="/articles"
           >
             See All Articles
@@ -90,7 +92,7 @@ function HeroImage({ imageUrl }) {
   }
 
   return (
-    <div className="md:pr-16 my-4">
+    <div className="md:pr-16 my-4 dark:my-8">
       <img
         className="object-cover rounded-2xl"
         src={imageUrl}
