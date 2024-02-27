@@ -1,4 +1,7 @@
 import "./globals.css";
+import Header from "@/components/Header";
+
+import Link from "next/link";
 
 export const metadata = {
   title: "🕹️ Andrew Paxson",
@@ -7,12 +10,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className="bg-neutral-50 text-neutral-700 max-w-3xl mx-auto py-20 px-4 dark:bg-zinc-800 dark:text-zinc-300"
-    >
-      <body>
-        <main className="flex flex-col">{children}</main>
+    <html lang="en">
+      <body className="h-screen flex flex-col bg-white dark:bg-black text-neutral-800 dark:text-neutral-50 dark:font-light">
+        <main className="flex-row justify-center items-center mb-auto">
+          {children}
+        </main>
+        <footer className="w-full text-sm p-4 mb-2 flex-row justify-center m-auto text-center text-neutral-400">
+          <p>© 2024 Andrew Paxson</p>
+          <p>This website was made with ♥️ using next.js and tailwindcss.</p>
+          <Link
+            className="font-medium hover:underline"
+            href="https://github.com/paxsonsa/website"
+          >
+            Check out the code here
+          </Link>
+        </footer>
       </body>
     </html>
   );
