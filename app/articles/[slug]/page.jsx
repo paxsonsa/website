@@ -60,6 +60,7 @@ export default function Page({ params }) {
 
   return (
     <>
+      <Header />
       <Subheader title="Articles & Posts" href="/articles" />
       <div className="bg-white dark:bg-black justify-center p-4 pb-16 border-b border-b-neutral-200">
         <article className="max-w-screen-md m-auto pt-8">

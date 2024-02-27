@@ -10,6 +10,7 @@ import Subheader from "@/components/Subheader";
 export default function Projects() {
   return (
     <>
+      <Header />
       <Subheader title="Projects and Work" href="/work" />
       <section className="flex flex-col text-center p-4 mt-16">
         <h1 className="text-neutral-800 dark:text-neutral-50 text-2xl font-semibold m-auto">

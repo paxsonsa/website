@@ -38,6 +38,7 @@ export default function Articles() {
 
   return (
     <>
+      <Header />
       <Subheader title="Articles and Posts" href="/articles" />
       <section className="md:*:max-w-screen-md *:m-auto">
         <ArticleList articles={articles} />

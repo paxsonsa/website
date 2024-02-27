@@ -1,14 +1,15 @@
 import Link from "next/link";
 
-export default function Header({ activePage }) {
-  const isActive = (page) => {
-    return activePage == page ? "" : "";
-  };
-
-  const linkCss = "";
-
+export default function Header({ sticky }) {
+  console.log(sticky);
+  let withSticky = "";
+  if (sticky) {
+    withSticky = "sticky top-0";
+  }
   return (
-    <div className="justify-center bg-neutral-100 dark:bg-neutral-800 md:px-8">
+    <div
+      className={`${withSticky} justify-center backdrop-blur-lg bg-neutral-100/70 dark:bg-neutral-800/80 bg-blur- md:px-8`}
+    >
       <nav className="flex justify-center md:max-w-screen-lg items-center md:justify-start m-auto">
         <div className="flex justify-center py-3">
           <Link

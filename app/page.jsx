@@ -6,7 +6,8 @@ import { GithubCircle, Linkedin, X } from "iconoir-react";
 export default function Home() {
   return (
     <>
-      <section className="flex flex-col items-center p-8 my-2 md:mt-8">
+      <Header sticky />
+      <section className="flex flex-col items-center p-8 my-24 md:my-2 md:mt-8">
         <div className="flex flex-col items-center m-auto text-neutral-900 dark:text-white">
           <h1 className="text-4xl text-center font-bold">
             Hello,{"  "}I'm Andrew!
@@ -58,7 +59,6 @@ export default function Home() {
             </>
           }
         />
-        ``
         <Section
           title="Experience building from concept to deployment"
           content={
@@ -98,7 +98,7 @@ export default function Home() {
 
 function Section({ title, content }) {
   return (
-    <section className="flex flex-col justify-center text-center items-center m-y-2 flex-1">
+    <section className="flex flex-col justify-center text-center items-center my-12 md:my-2 flex-1">
       <div className="flex flex-col justify-center items-center m-auto p-8 space-y-4">
         <h3 className="text-xl font-semibold dark:font-bold dark:text-neutral-50">
           {title}
