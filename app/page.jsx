@@ -63,7 +63,7 @@ export default function Home() {
           title="Experience building from concept to deployment"
           content={
             <>
-              I have a unqiue skillset and experience as a designer doubling as
+              I have a unique skillset and experience as a designer doubling as
               a software engineer. I have designed and written low-level systems
               such as software build, distribution and packaging systems to
               higher level tooling for creative workflows and UIs for artists.
