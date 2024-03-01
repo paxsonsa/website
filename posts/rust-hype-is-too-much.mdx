@@ -1,33 +1,36 @@
 ---
 title: Let's not overhype rust.
 date: '2023-11-04'
-description: "Rust is a very exciting lanaguage and community, but rustaceans should be careful not to overhype it."
+description: >-
+  Rust is growing in popularity and hype but we should be cautious about overselling it. I can already hear the rustaceans sharpening their claws, but hear me out.
+  As rust evangelists, we need to be vigilant around overhyping, or rather overselling, the language.
 hidden: true
 tags: [
   "development",
 ]
 ---
 
-Rust is awesome. The developer tooling is "chef's kiss". The lanaguage is equal parts powerful and safe.
-I have been using rust in production for a while now and I am very happy with it! If you are a developer
-in need of a highly performant and safe language, rust is a great choice. But, lets not oversell it.
+Rust is awesome. The developer tooling is "chef's kiss". The lanaguage is powerful and helpful.
+I have been using rust in production for a little over 2 years now and I am sold! If you are a developer
+in need of a highly performant and safe language, rust is worth adding to your shortlist. But, lets not oversell it.
 
-A bit of context: At the time of writing this, I am a lead software engineer at a major visual effects company. 
-Our collective code base is primarily python and C++ based and we have only recently started to embrace service oriented 
-systems where it makes sense. I work with people who have been writing C++ and Python before it was novel. I personally
-starting using python with version 2.5. Our digital content creation applications (DCCs) are primarily C++ 
-applications with embedded python apis. Python is the backbone of the majority of our data pipelines due to its
-ease of use and availability.
+A bit of context: At the time of writing this, I am a lead software engineer at a major visual effects company.
+Our collective code base is primarily python and C++ based and we have only recently started to embrace service oriented
+systems where it makes sense. I work with people who have been writing C++ and Python before it was popular and in demand. I personally
+starting using python with version 2.6. Our digital content creation applications (aka DCCs) are primarily C++
+applications with embedded python APIs exposed for data pipeline building. This has made C++ and Python the backbone for the majority of our data pipelines due to its
+ease of use, adoption, and availability.
 
 Rust has been rushing into the development world and its exciting! It brings with so many great features and paradigms
-for a genre of development that requires highly performance, low-level access, and saftey! Many of my peers are excited
-about the possibilities to allow use to write incredible performant code without all the pitfalls of C/C++. 
+for a genre of development that requires highly performant runtimes with low-level access and solid memory safety! Many of my peers are excited
+about the possibilities to allow us to write incredible performant code without all the pitfalls of C/C++.
 
-That said, rust evangelists, like myself, need to be cautious about being zealots. For some natural reason,
-when a new exciting language, paradigm, or idea comes into the scene there is a desire to juxtapose it to the 
-death of a "thing". Some rustaceans harald its coming as the end of C++ and any who oppose its progress are just
-trogolodytes hampering the progress of its natural evolution...or at least that is how it can come across. I am not convinced
-that is helpful to the adoption within the community or the language. 
+That said, rust evangelists, like myself, need to exercise caution about being over zealous about what the language can bring. Even saying rust will "allow us to
+write incredibly performant code with all the pitfalls of C/C++" is, at best, a passionate overstatement and at worst a dense and uninformed half-truth.
+
+- as we do along my hope is to provide a few ways we can be better evangelists and make the community for rust less intimidating and stronger.
+- want to avoid ciche, not about the langaguad is a tool, engineering is more than about the tool, the problem is skill not the tool.
+
 
 ## Know thy audience
 - Many C++/C developers have years of experience solving complex memory problems. They are not afraid of memory management.
@@ -49,9 +52,9 @@ that is helpful to the adoption within the community or the language.
 - Rust has great FFI tools and its macro system makes such tooling an amazing (and sometimes opaque) experience.
 - If I cannot integrate rust into my existing codebase, I am not going to use it.
 - We are not talking about migrating 5 year code, we are taling about code that has been around for 20+ years.
-- Rust may actually make it slower. 
+- Rust may actually make it slower.
 
-## Bind me hard. 
+## Bind me hard.
 - Python bindings are at the core of our industry.
 - We have a lot of legacy code that needs to interop with C/C++ code.
 - Highlighting rusts ability to bind to other languages is a huge selling point.
