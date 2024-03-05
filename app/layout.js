@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 
 export const metadata = {
+  metadataBase: new URL("https://andrewpaxson.com"),
   title: "🕹️ Andrew Paxson",
   description: "I like to make things for creative people.",
 };

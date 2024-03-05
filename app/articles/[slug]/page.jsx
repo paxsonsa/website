@@ -44,9 +44,13 @@ function getPost({ slug }) {
 export async function generateMetadata({ params }) {
   const blog = getPost(params);
   return {
+    metadataBase: new URL('https://andrewpaxson.com'),
     title: `${blog.frontMatter.title}`,
     author: "Andrew Paxson @MrPaxson",
     description: blog.frontMatter.description,
+    openGraph: {
+      images: `/${blog.frontMatter.image}`
+    },
   };
 }
 
@@ -60,11 +64,14 @@ export default function Page({ params }) {
 
   return (
     <>
+      <title>{props.frontMatter.title}</title>
+      <meta name="title" content={props.frontMatter.title} />
+      <meta name="description" content={props.frontMatter.description} />
+
       <Header />
       <Subheader title="Articles & Posts" href="/articles" />
       <div className="bg-white dark:bg-black justify-center p-4 pb-16 border-b border-b-neutral-200">
         <article className="max-w-screen-md m-auto pt-8">
-          <meta name="description" content={props.frontMatter.description} />
           <h2 className="text-2xl font-medium">{props.frontMatter.title}</h2>
           <h3 className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
             {formattedDate}
