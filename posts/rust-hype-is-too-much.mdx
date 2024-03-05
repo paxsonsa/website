@@ -1,62 +1,73 @@
 ---
-title: Let's not overhype rust.
-date: '2023-11-04'
+title: Let's not over-hype rust.
+image: /img/rust-hype.webp
+date: '2024-03-05'
 description: >-
   Rust is growing in popularity and hype but we should be cautious about overselling it. I can already hear the rustaceans sharpening their claws, but hear me out.
-  As rust evangelists, we need to be vigilant around overhyping, or rather overselling, the language.
-hidden: true
-tags: [
-  "development",
-]
+  As rust evangelists, we need to be vigilant around over-hyping, or rather overselling, the language as it can be intimidating and off-putting to potential adopters.
 ---
+Rust has been rushing into the development world and it's exciting! It brings with so many great features and paradigms for a genre of development that requires highly performant runtime environments with low-level access and solid memory safety! Many of my peers are excited about the possibilities to allow us to write incredibly performant code without all the pitfalls of C/C++.
 
-Rust is awesome. The developer tooling is "chef's kiss". The lanaguage is powerful and helpful.
-I have been using rust in production for a little over 2 years now and I am sold! If you are a developer
-in need of a highly performant and safe language, rust is worth adding to your shortlist. But, lets not oversell it.
+That said, rust evangelists, like myself, need to exercise caution about being over zealous around what the language can bring. Even saying rust will "allow us to write incredibly performant code without all the pitfalls of C/C++" is, at best, a passionate overstatement and at worst a dense and uninformed half-truth.
 
-A bit of context: At the time of writing this, I am a lead software engineer at a major visual effects company.
-Our collective code base is primarily python and C++ based and we have only recently started to embrace service oriented
-systems where it makes sense. I work with people who have been writing C++ and Python before it was popular and in demand. I personally
-starting using python with version 2.6. Our digital content creation applications (aka DCCs) are primarily C++
-applications with embedded python APIs exposed for data pipeline building. This has made C++ and Python the backbone for the majority of our data pipelines due to its
-ease of use, adoption, and availability.
+Rust is awesome. The developer tooling is "chef's kiss" and language is powerful. I have been using it in production for a little over 2 years now and I am sold! 
 
-Rust has been rushing into the development world and its exciting! It brings with so many great features and paradigms
-for a genre of development that requires highly performant runtimes with low-level access and solid memory safety! Many of my peers are excited
-about the possibilities to allow us to write incredible performant code without all the pitfalls of C/C++.
+At the time of writing this, I am a lead software engineer at a major visual effects company. Our collective code base is primarily python and C++ based thats been around for a few decades. Myself and the people I work with have been using C++ and Python many many years. I personally started using python with version 2.6 and have been working with C++ longer! Our digital content creation applications (aka DCCs, think Blender) are primarily C++ applications with embedded python APIs exposed for data pipeline building. This has made C++ and Python the backbone for the majority of our data pipelines due to its ease of use, adoption, and availability. 
 
-That said, rust evangelists, like myself, need to exercise caution about being over zealous about what the language can bring. Even saying rust will "allow us to
-write incredibly performant code with all the pitfalls of C/C++" is, at best, a passionate overstatement and at worst a dense and uninformed half-truth.
+The code we write is not keeping Jets aloft or managing billions of dollars in financial transactions. We are just making the prettiest pixels we can in the coolest way we can. It's not curing cancer but god damn, it's fun!
 
-- as we do along my hope is to provide a few ways we can be better evangelists and make the community for rust less intimidating and stronger.
-- want to avoid ciche, not about the langaguad is a tool, engineering is more than about the tool, the problem is skill not the tool.
+The point of all this context is to highlight the, hopefully, unique perspective and experience I originate from. I love rust. I think it's a really solid language and I think it has a lot of potential. That said, I think we, the rust evangelists, need to be better about how we sell it to our peers and particularly C++ and Python developers.
 
 
-## Know thy audience
-- Many C++/C developers have years of experience solving complex memory problems. They are not afraid of memory management.
-- Many python developers are not interested in the complexities of memory management. They are interested in solving problems.
-- Many C++/C developers are not using the latest and greatest C++ paradigms.
-- People are always skeptical of new tools, not because they are afraid of change but because the are afraid of being ineffective.
+## Rust vs C/C++
 
-## Memory safety is not a pancea.
-- Rust prioritizes memory safety but that is not always the problem that needs to be solved.
-- Rust has in mind how a code will evolve over time while C++ is concerned with how it can be controlled now.
-- Modern C++ has made great strides in memory safety.
-- Many of rusts features can be viewed as burdensome and an unnecessary paradigm shift.
-- Selling rust memory safety through the lense of multithreading maybe a good approach.
-- Moving to rust because it has better memory safety is like migrating from python to elixir because it has better concurrency, its true but it may now mean alot in context.
+Rust and C++ have been pitted against each other in a battle of memory safety and performance. This is a false dichotomy that is definitely a minority opinion but we, the people of the age of incentivize enraged engagement, understand it will be the one that will get the most engagement. Rust zealots are quick to list the many ways rust "beats" C++ and if you disagree you are a C++ apologist and a troglodyte who is afraid of change and impeding the progress of the inevitable rise of the true golden order! LOL shut up. C++ is a powerful language that has been around for a long time. It has a lot of features and paradigms that are not going to be replaced by rust. 
+
+Many C++/C developers have devoted years of their lives to mastering the language. They are not afraid of memory management. They are not afraid of pointers. They are not afraid of undefined behavior. They are not afraid of the complexities of C++ and have experience debugging those problems.
+
+No matter how many times you tell them "the borrow checker is not that bad", they are not going to take the word of a community who is saying "yea, that thing you are an expert in is shit."
+
+People are always skeptical of new tools, not because they are afraid of change but because they are afraid of being ineffective and arguing to a C++/C that rust is better because you don't have to worry about memory management is equivalent to telling a car racing enthusiast they should switch to an automatic transmission because they'll save money on gas and it's easier to drive. 
+
+## Memory Safety is not a panacea
+
+You cannot say "Rust" without saying "memory safety". They amount of time we spend proclaiming how "safe" rust is completely over shadows so many of the other great features of the language. Moving to rust solely for memory safety is like moving from python to elixir because it has better concurrency. It's true but it may not mean a lot in context.
+
+Rust has in mind how code will evolve over time, enforcing strict memory rules to ensure that, as your code evolves, that old function that was written 5 years ago by someone who no longer works at the company, is not going to be the source of a memory issue because we forgot an allocation. This is a great feature but it is not always the problem that needs to be solved. 
+
+Rust has so many great features and some of which are ONLY possible because of its memory management model but we should be preaching those features as well like:
+
+- **The macro system** is so powerful and expressive and the kinds of things you can do with it as a library author is amazing for UX and API design and guess what, its all checked by the compiler!
+- **Immutable values** are so great. You can pass around values without worrying about them being changed. This is a great feature for multithreading and is a great way to avoid bugs.
+- **Pattern matching** is so powerful and expressive, it makes you hate using if/else statements.
+- **Result and Option Type** are not unique to rust but they are right there in the standard library and make error handling and value checking so much brisker when combined with pattern matching!
+
+These are just a few of the great features of rust that are overshadowed by the memory safety narrative. We should be preaching these features as well as the memory safety features.
+
 
 ## Brownfield development is key.
-- The company I work at has been around for 40+ years. We have a lot of legacy code.
-- Rust developer tooling is amazing for new projects but try inte grating it into a legacy codebase.
-- Rust has great FFI tools and its macro system makes such tooling an amazing (and sometimes opaque) experience.
-- If I cannot integrate rust into my existing codebase, I am not going to use it.
-- We are not talking about migrating 5 year code, we are taling about code that has been around for 20+ years.
-- Rust may actually make it slower.
 
-## Bind me hard.
-- Python bindings are at the core of our industry.
-- We have a lot of legacy code that needs to interop with C/C++ code.
-- Highlighting rusts ability to bind to other languages is a huge selling point.
-- Macros are fucking amazing
+The company I work at has been around for 40+ years. We have a lot of legacy code. The rust developer tooling is amazing for new projects but trying integrating it into a legacy codebase is not well discussed. Part of the problem is not very sexy. However, if I cannot integrate rust into my existing decades old codebase, I am not going to be able use it. We are not talking about migrating 5 year code, we are talking about code that has been around for 20+ years.
 
+This is one area I would love to see the community focus more on and hear stories about. Not about how you moved you entire stack to rust but how you rewrote and integrated this tiny piece of your codebase and how it made your life better.
+
+So much of the rust marketing is around the awesome libraries and tools for creating new projects but most of us are not creating new projects every day and more importantly we have to be very targeted about where we add new technologies to our stack.
+
+Rust has the tooling to make this possible but it is not well discussed because it the part of the job that is not headline news. No one really jumps out of their seat to hear about how you rewrote a image sequence parser in rust that was originally a python API and now is 5x faster and still called by the same python APIs and nothing changed drastically but it is important work.
+
+In film and visual effect industry, we have a [reference platform](https://vfxplatform.com/) for the versions of libraries and tools we should aim to use. This exists to align companies for interoperability and to ensure that we are not all using different versions of the same library for our DCCs. 
+
+This highlights an important idea for rust, as anything that is built/bound will have to be able to meet and support up with things like this reference platform. Rust can do this but it tends to be more focused on the latest and greatest rather than stability and backwards compatibility.
+
+## Bind all the things
+This is maybe a bit derivative of the previous point but I think its worth highlighting. As I mentioned in my introduction, the industry I work in is most a C++/Python based. This means a metric shit ton (technical term) of python bindings. We have a lot of legacy code that needs to interop with C/C++ code as well. Highlighting rusts ability to bind to other languages is a huge selling point.
+
+As mentioned, the macro system is so powerful and using something like [pyo3](https://github.com/PyO3/pyo3) to create python bindings for a rust library without really needing to know how to write python bindings is low-key amazing. It's not just python though! 
+
+Things like [bindgen](https://github.com/rust-lang/rust-bindgen) also allow us to create C bindings (and some C++ bindings) with some ease but its a bit more clunky! You can even (kind of) go the other way with [autocxx](https://google.github.io/autocxx/index.html) which allows you to use some C++ code that can be called from rust!
+
+## Conclusion
+
+Rust is awesome, I love it and I think it has the potential to make writing highly performant and low-level code more accessible to more developers. That said, we need to be cautious about how we sell it to our peers. We need to be better about highlighting the features of rust that are not just memory safety and we need to be better about highlighting how it can be integrated into existing codebases.
+
+Its also important for us to be humble about the things that suck about rust. It's not perfect and it's not going to be the right tool for every job (try writing complex UI code in rust). We need to be honest about that and not oversell it and try to make a case for it where it doesn't belong. 
