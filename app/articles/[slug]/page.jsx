@@ -73,7 +73,7 @@ export default function Page({ params }) {
       <div className="bg-white dark:bg-black justify-center p-4 pb-16 border-b border-b-neutral-200">
         <article className="max-w-screen-md m-auto pt-8">
           <h2 className="text-2xl font-medium">{props.frontMatter.title}</h2>
-          <h3 className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+          <h3 className="text-sm text-neutral-500 dark:text-neutral-400 mt-1 mb-4 dark:mb-8">
             {formattedDate}
           </h3>
           <HeroImage imageUrl={props.frontMatter.image} />
@@ -100,7 +100,7 @@ function HeroImage({ imageUrl }) {
   }
 
   return (
-    <div className="md:pr-16 my-4 dark:my-8">
+    <div className="md:pr-16 mb-4 dark:mb-8">
       <img
         className="object-cover rounded-2xl"
         src={imageUrl}
