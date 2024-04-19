@@ -1,0 +1,61 @@
+---
+title: Stop Designing and Start Prototyping. 
+date: '2024-04-18'
+image: /img/appstatisics_prototype.webp
+imageCaption: >-
+  This was one of my very first prototypes for a high velocity & high performance usage metrics systems. I made this in during a coffee break and then slapped together a prototype python API and backend service which was just a fork of statsd with some hacking. This prototype would evolve into a more complete system and suite of tools that is now very heavily used at my current employer. When I pitched this to my boss at the time there was a lot of skeptism about the design and scalability. Over a few iterations with a working prototype, they were eventually on board. The first 'real' version didn't have a database, it just wrote the metrics to disk and you could visit the service to see a list in raw html, after that it became a major service used by many developers. 
+description: >-
+  Product design and engineering has never been more mainstream than today. All the buzzwords and processes that exist to guide good product design and engineering can sometimes lead us afar and we lose sight of the users, their problems, and our inspiration. We can lost in the details or caught up in analysis. But if there is one thing to remember its to always be prototyping.
+
+---
+*TLDR; Building and engineering products is never an easy task and there are a lot of frameworks to help guide the design process. While these are helpful and important tools to have, the most important part is to focus on prototyping. Keep your prototyping ugly and fast so you can keep a rhythmic cadence. Be comfortable with throwing out work and ideas, your v1 is never final. Include a limited number of new/updated ideas per iteration. Don't build the whole thing, fake the parts we cant build fast, defer the ideas we can't solve now, and forget ideas that get in the way. Finally, make sure to find joy in the process and to make that joy into your prototypes. The best part is getting to create with others, whatever we are building is just the cherry on top.*
+
+This is not another explanation of process frameworks like Design Thinking, there is already a metric crap ton (a scientific measurment) of content out there and frankly, its over sold (from someone who has bought it before). If you clicked on this post you probably already have in inclination of what design thinking is and its steps. If not, have fun down that exciting rabbit hole but before you get too far let's talk about the importance prototyping.
+
+Over the years, I feel as though the conversation around product design has shifted away from creative technique and craft to framework, tooling, and process. The new hot term is DesignOps (queue raindow "The more you know"). I still can't tell if DesignOps is just another scheme to sell more SaaS products or seminars but I digress, the bottomline is we may need to be designing less and prototyping more. And before you go sending a "Well, actually..." DM or email, I know prototyping is apart of designing but in the 'design thinking' process it is (depending on the cloned IDEO graphic you find) 1/5 of that process and I am not sure most teams spend even that amount of time doing it.
+
+# Prototypes are Magic
+
+The urge to explore and discuss is strong, especially if you are in a cycle of mental masturbation or whiteboard vanity. The excitement of the problem, potential solutions, and/or novel designs can lead us to never-everland in terms of results. Meetings after meetings, user stories, journey maps, empathy diagrams, design systems.....it can all be just spinning our wheels in the mud. That is not to say there isn't value in those things but "if an image is worth a thousand words then a prototype is worth a thousand meetings" (source: IDEO, I think). And a prototype is a magical thing. It lets people connect to a problem and solution is very concrete way. It can be an object they can feel, a diagram of a system structure, or a wireframe of an app. It just has to be 'something' the user can touch, interact with, and engage with limited guidance which really opens the space for many ways to prototype!
+
+For many years, I have done my best to encourage and drive this mentality. In my current team and am always asking for more prototyping. I think it truely comes from working in the Visual Effect industry; The entire VFX process is centered around having something show and review in a theatre or on a screen. It's something I have tried to carry over into my product designs and engineering by trying to be quick to get an idea out and even faster to prototype it in a meaningful way. Some of my most favorite designs are ones where the first prototype was bad and ugly but through iteration became really useful, delightful, and pragmatic.
+
+
+# Be Ugly & Fast
+The word "prototype" can have different meanings to different people. I remember my formal Engineering Lead and I debating about its meaning for hours. For him, it was a more formal version of the product/system that is ready for use and for me a prototype is no more permanent than a sketch drawing on a napkin. Reasonable minds can disagree but for me a prototype is just an idea is a more tactile form. It should be ugly and rough around the edges but still convey a story and purpose. With each iteration the ugliness is smoothed out into, hopefully, an elegant representation.
+
+My general rule of thumb is most ideas can be prototyped in under an hour. UI idea? Draw it, make it messy. New API/Framework? Stub it and show it. New process? Graph it. The key is to get the idea out and give someone something to use, test, and see. But be ready, the feedback on your first ugly version is never going to be 'great'. It maybe too ambiguous, too abstact, too incomplete. Good. In the early stages measure you engagement and feedback. Ignore (polietly!) overly detailed critism and thoughts. You know you have a generally good direction when the questions and comments build on your idea and as "yes, and"s rather than tearing it down with "no, but"s.
+
+# Throw it out
+The thing that holds most people back from prototyping is:
+1) A fear of being wrong or rejected
+2) Over analyzing the problem.
+3) A worry that the work will result in nothing.
+
+This is a lot of emotional investment and attachment to the idea and thus the prototype. Stop. 
+
+Every prototype is trash. Treat it as such and commit to being ok with it being thrown away. It can suck to work hard on something and have to just chuck it. It feels like a waste but that is the wrong perspective. We live in world of digital content made out of fast to write code and easy to make pixels. We have these amazing tools called computers and pencils that let us make everything and nothing all at once! Time is precious but throwing out work is not time wasted, its time spent. The path to a great product is all about the things you learned not to do. 
+
+# One Idea at a time.
+When I was younger, my prototyping process was very tedious. I wanted to catch every angle and concepts and have all the answers. What a royal waste of time and what an arrogant approach. There is no way I can conceive of every edge case or problem and often, my concept of those were assumptions or just wrong. Prototypes are not meant to have all the answers, they are meant only have a few answers and ideas. 
+
+Over time I learned, with each prototype iteration I should limit the number of ideas that are added or modified. It just makes the process easier and getting feeback quicker; 
+
+
+"Here's another version, I only changed this let me know what you think about it". 
+
+A prototype doesn't have to convey all the answers. The answers to those other problems and questions can be "I don't know", "We didn't consider that" or even "Thats not what we are focused on right now". 
+
+Take it one idea at a time. 
+
+# Fake it, Defer it, or Forget it
+One of my most recent projects was working on a system to track and distribute software more easily. It is a monolith of a system to build and design with too many workflows and a wicked wicked problem. One of the first things we did, encouraged by a great peer of mine, was to just defer thinking about the database, "It's an implementation detail" he would say. He was right, defer that design decision and its a good thing we did because we changed that data model so many times and we also ended up writing a pretty decent abstraction for storing that model so we could switch out the DB with some ease!
+
+Prototyping is the art of faking it. Making skeletions of UIs with no backends that 'seem to work', building API/Frameworks that look like they are doing something for presentations, or building a service that uses the filesystem as a database. It's all fair game when you are trying to make something amazing. You cannot do it all at once, it'll kill the momentum and take too long and that means conversations and collaboration are forgotten unless you have a good cadence. If a particular feature, component, or idea is in the way, forget it and come back to it. If it mattered it will come up again when it needs too.
+
+# Make Joy
+Prototyping is the most joyful part. Its pure creation and collaboration and its the reason I fell in love with design and engineering. That's an important thing to remember, enjoy the process. If your prototyping is stressful and you are not having fun you are either too invested, doing it wrong, or in a toxic situation. Get Out.
+
+The best part of prototyping is being able to share ideas and have that feeling of excitement when an idea hits and you and your collaborators are building on eachother. I have to imagine this is how it feels to do improv comedy or play in a jazz band. 
+
+Let your prototypes be a conduit for your joy and love for the product and people its for. If you forget everything else try to remember to make joy.
