@@ -76,7 +76,7 @@ export default function Page({ params }) {
           <h3 className="text-sm text-neutral-500 dark:text-neutral-400 mt-1 mb-4 dark:mb-8">
             {formattedDate}
           </h3>
-          <HeroImage imageUrl={props.frontMatter.image} />
+          <HeroImage imageUrl={props.frontMatter.image} imageCaption={props.frontMatter.imageCaption} />
           <div className="prose prose-neutral dark:prose-invert dark:prose-p:text-neutral-50">
             <MDXRemote source={props.content} options={options} />
           </div>
@@ -94,7 +94,7 @@ export default function Page({ params }) {
   );
 }
 
-function HeroImage({ imageUrl }) {
+function HeroImage({ imageUrl, imageCaption = null }) {
   if (!imageUrl) {
     return null;
   }
@@ -106,6 +106,7 @@ function HeroImage({ imageUrl }) {
         src={imageUrl}
         alt="Hero Image"
       />
+      { imageCaption ? <span className="text-neutral-500 italic text-xs">{imageCaption}</span> : null }
     </div>
   );
 }
