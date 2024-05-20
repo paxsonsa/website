@@ -60,3 +60,4 @@ This is the repo for my personal website.
   - Under the 'Production' section, select 'add variables' to add a new variable:
     - Variable name: *SITE_URL*
     - Value: *[enter the value of your site URL, e.g., https://www.michellef.dev]*
+  -test
