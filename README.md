@@ -48,3 +48,15 @@ This is the repo for my personal website.
   - Make sure the site works
     - In the Cloudflare project's dashboard, go to the 'Deployments' tab
     - Select the 'Visit site' link to ensure everything is working as expected
+
+
+    
+## How to Customize the RSS Feed
+- Login to Cloudflare
+- Select 'Workers & Pages' in the left sidebar
+- Select the project application
+- Go to the 'Settings' tab
+  - Select the 'Environment Variables' tab on the left
+  - Under the 'Production' section, select 'add variables' to add a new variable:
+    - Variable name: *SITE_URL*
+    - Value: *[enter the value of your site URL, e.g., https://www.michellef.dev]*
