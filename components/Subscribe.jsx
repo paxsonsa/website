@@ -9,7 +9,7 @@ const Subscribe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/subscribe', {
+    const res = await fetch('https://subscribe-worker.michellef.workers.dev', {
       body: JSON.stringify({ email, firstName }),
       headers: {
         'Content-Type': 'application/json',
@@ -17,8 +17,13 @@ const Subscribe = () => {
       method: 'POST',
     });
 
-    const { error } = await res.json();
-    if (error) {
+    if (!res.ok) {
+      setStatus('error');
+      return;
+    }
+
+    const data = await res.json();
+    if (data.error) {
       setStatus('error');
       return;
     }
