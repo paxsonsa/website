@@ -47,7 +47,8 @@ This is the repo for my personal website.
       - Select 'Check DNS records"
   - Set up the blog mailing list:
     -If you DO NOT want to set up the blog mailing list:
-      - Remove all instances of the 'Subscribe' component from the following files:
+      - Remove 'Subscribe' import statement and the 'Subscribe' component invocation (i.e. <Subscribe />) from the following files:
+        - app/page.jsx
         - app/articles/page.jsx
         - app/articles/[slug]/page.jsx
     - If you DO want to set up the blog mailing list:
