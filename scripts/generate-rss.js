@@ -1,17 +1,17 @@
-import fs from 'fs';
-import path from 'path';
-import RSS from 'rss';
-import matter from 'gray-matter';
+const fs = require('fs');
+const path = require('path');
+const RSS = require('rss');
+const matter = require('gray-matter');
 
 const siteUrl = process.env.SITE_URL;
 
-export async function getServerSideProps({ res }) {
+const generateRSS = () => {
   const postDirectory = path.join(process.cwd(), 'posts');
   const filenames = fs.readdirSync(postDirectory);
 
   const feed = new RSS({
-    title: 'Design + Dev Blog', 
-    description: 'A blog about design and development by Andrew Paxson.', 
+    title: 'Design + Dev Blog',
+    description: 'A blog about design and development by Andrew Paxson.',
     site_url: siteUrl,
     feed_url: `${siteUrl}/rss.xml`,
   });
@@ -29,15 +29,8 @@ export async function getServerSideProps({ res }) {
     });
   });
 
-  res.setHeader('Content-Type', 'text/xml');
-  res.write(feed.xml({ indent: true }));
-  res.end();
+  const rss = feed.xml({ indent: true });
+  fs.writeFileSync(path.join(process.cwd(), 'public', 'rss.xml'), rss);
+};
 
-  return {
-    props: {},
-  };
-}
-
-export default function RssPage() {
-  return null;
-}
+generateRSS();
