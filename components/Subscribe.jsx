@@ -8,10 +8,10 @@ const Subscribe = () => {
   const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
-    console.log("BODY: ", JSON.stringify({ email, firstName }))
     e.preventDefault();
     // Modify URL to: 'https://andrewpaxson.com/api/subscribe'
-    const res = await fetch('https://ap-demo.michellef.dev/api/subscribe', {
+    // https://ap-demo.michellef.dev/api/subscribe
+    const res = await fetch('production.subscribe-worker.mvflandin.workers.dev', {
       body: JSON.stringify({ email, firstName }),
       headers: {
         'Content-Type': 'application/json',
