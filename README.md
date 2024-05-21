@@ -123,7 +123,9 @@ This is the repo for my personal website.
     - Add the Mailchimp API key
       - Variable name: MAILCHIMP_API_KEY
       - Value: *enter variable from previous step*
+      - Select Encrypt to protect the value
     -Add the Mailchimp List ID
       - Variable name: MAILCHIMP_AUDIENCE_ID
       - Value: *enter variable from previous step*
+      - Select Encrypt to protect the value
 
