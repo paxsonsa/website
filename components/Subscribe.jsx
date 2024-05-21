@@ -9,7 +9,8 @@ const Subscribe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('https://subscribe-worker.michellef.workers.dev', {
+    // Modify URL to: 'https://subscribe-worker.andrewpaxson.workers.com'
+    const res = await fetch('https://subscribe-worker.ap-demo.michellef.workers.dev', {
       body: JSON.stringify({ email, firstName }),
       headers: {
         'Content-Type': 'application/json',
