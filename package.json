@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate-rss && next build",
+    "build": "next build && npm run generate-rss",
     "start": "next start",
     "lint": "next lint",
     "generate-rss": "node scripts/generate-rss.js"
