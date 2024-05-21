@@ -11,7 +11,7 @@ const Subscribe = () => {
     e.preventDefault();
     // Modify URL to: 'https://andrewpaxson.com/api/subscribe'
     // https://ap-demo.michellef.dev/api/subscribe
-    const res = await fetch('https://subscribe-worker.mvflandin.workers.dev/', {
+    const res = await fetch('https://ap-demo.michellef.dev/api/subscribe', {
       body: JSON.stringify({ email, firstName }),
       headers: {
         'Content-Type': 'application/json',
