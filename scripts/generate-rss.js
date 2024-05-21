@@ -4,7 +4,7 @@ const RSS = require('rss');
 const matter = require('gray-matter');
 
 
-// Modify siteUrl to: 'https://www.andrewpaxson.com'
+// Modify siteUrl to: 'https://andrewpaxson.com'
 const siteUrl = process.env.SITE_URL;
 
 const generateRSS = () => {
