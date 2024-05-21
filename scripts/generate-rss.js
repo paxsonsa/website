@@ -4,8 +4,9 @@ const RSS = require('rss');
 const matter = require('gray-matter');
 
 
-// Modify siteUrl to: 'https://andrewpaxson.com'
-const siteUrl = process.env.SITE_URL;
+
+// Modify site url to: https://andrewpaxson.com
+// Modify feed url to: https://andrewpaxson.com/rss.xml
 
 const generateRSS = () => {
   const postDirectory = path.join(process.cwd(), 'posts');
@@ -14,8 +15,8 @@ const generateRSS = () => {
   const feed = new RSS({
     title: 'Design + Dev Blog',
     description: 'A blog about design and development by Andrew Paxson.',
-    site_url: siteUrl,
-    feed_url: `${siteUrl}/rss.xml`,
+    site_url: `https://ap-demo.michellef.dev`,
+    feed_url: `https://ap-demo.michellef.dev/rss.xml`,
   });
 
   filenames.forEach((filename) => {

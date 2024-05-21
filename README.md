@@ -114,9 +114,10 @@ This is the repo for my personal website.
       - In the left menu, under the 'Audience' heading, select 'All contacts'
       - Select the module's 'Settings' drop-down and select 'Audience name & defaults'
       - Under the Audience ID, copy the Audience ID value
-  - Add the Mailchimp API key and List ID to the Cloudflare environment variables: 
-    - Go to the Cloudflare application dashboard
-    - Select the 'Settings' tab
+  - Add the Mailchimp API key and List ID to the Cloudflare Worker's environment variables: 
+    - Go to Cloudflare and select 'Workers & Pages' from the left side menu
+    - Select the subscribe-worker
+    - Go to the 'Settings' tab
     - In the Environment Variables -> Production section, select 'Add variables' or 'Edit variables'
     - Select 'Add variable'
     - Add the Mailchimp API key
