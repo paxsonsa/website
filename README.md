@@ -59,5 +59,25 @@ This is the repo for my personal website.
   - Select the 'Environment Variables' tab on the left
   - Under the 'Production' section, select 'add variables' to add a new variable:
     - Variable name: *SITE_URL*
-    - Value: *[enter the value of your site URL, e.g., https://www.michellef.dev]*
-  -test
+    - Value: *[enter the value of your site URL, e.g., https://andrewpaxson.com]*
+- Signup/login to MailChimp
+  - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
+    - Campaign Name: Share blog updates
+    - Click 'Begin' button
+    - RSS feed URL: *enter your website url + /rss.xml - e.g. https://andrewpaxson.com/rss.xml*
+    - When should we send?: *enter to your preference*
+    - Click Next
+    - Select 'Entire audience'
+    - Click next
+    - Modify preferences to your choosing (e.g. connect to Twitter)
+    - Click next
+    - Select a template and design your email - example: 
+      - Add a 'Code' section to the email and insert the following code:
+      - ```
+        <h2>*|RSSITEM:TITLE|*</h2>
+        <p>*|RSSITEM:CONTENT|*</p>
+        <a href="*|RSSITEM:URL|*">Read more</a> <p><small>Published on *|RSSITEM:DATE|*</small></p>
+        ```
+    - Click next
+    - Click 'Satrt campaign'
+

@@ -5,6 +5,9 @@ const matter = require('gray-matter');
 
 const siteUrl = process.env.SITE_URL;
 
+console.log(`Generating RSS feed with site URL: ${siteUrl}`);
+
+
 const generateRSS = () => {
   const postDirectory = path.join(process.cwd(), 'posts');
   const filenames = fs.readdirSync(postDirectory);
