@@ -29,22 +29,22 @@ const Subscribe = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-2 bg-white dark:bg-gray-800 mt-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Subscribe to my Blog</h2>
+    <div className="max-w-md mx-auto p-2 bg-white dark:bg-gray-800 mt-2 mb-8">
+      <h2 className="text-2xl font-bold mb-4 text-center">Subscribe to my blog</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+      <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder="First name"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-blue-500"
+        />
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          placeholder="Email"
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-blue-500"
-        />
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="Enter your first name"
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-blue-500"
         />
         <button
