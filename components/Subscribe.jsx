@@ -8,6 +8,7 @@ const Subscribe = () => {
   const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
+    console.log("BODY: ", JSON.stringify({ email, firstName }))
     e.preventDefault();
     // Modify URL to: 'https://andrewpaxson.com/api/subscribe'
     const res = await fetch('https://ap-demo.michellef.dev/api/subscribe', {
@@ -16,8 +17,7 @@ const Subscribe = () => {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-    });
-    console.log("BODY: ", JSON.stringify({ email, firstName }))
+    });    
 
     if (!res.ok) {
       setStatus('error');
