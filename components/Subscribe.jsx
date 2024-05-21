@@ -15,7 +15,6 @@ const Subscribe = () => {
       body: JSON.stringify({ email, firstName }),
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
       },
       method: 'POST',
     });    
