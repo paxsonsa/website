@@ -1,3 +1,5 @@
+// Note: This script has no direct functionality within this application, it is only meant as a reference to be used for the Cloudflare Worker code (i.e. subscribe-worker)
+
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
