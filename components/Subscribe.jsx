@@ -29,7 +29,7 @@ const Subscribe = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-2 bg-white dark:bg-gray-800 mt-1.5 mb-8">
+    <div className="max-w-md mx-auto p-2 bg-white dark:bg-gray-800 mt-1 mb-8">
       <h2 className="text-2xl font-bold mb-4 text-center">Subscribe to my blog</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
       <input
