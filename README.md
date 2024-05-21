@@ -45,13 +45,21 @@ This is the repo for my personal website.
       - Login to your DNS provider (website host) and find your website's DNS settings
       - Add a CNAME record which points to the Cloudflare target address
       - Select 'Check DNS records"
+  - Set up the blog mailing list:
+    -If you DO NOT want to set up the blog mailing list:
+      - Remove all instances of the 'Subscribe' component from the following files:
+        - app/articles/page.jsx
+        - app/articles/[slug]/page.jsx
+    - If you DO want to set up the blog mailing list:
+      - Follow the [How to Set Up the Blog Mailing List](#how-to-setup-blog) instructions below
   - Make sure the site works
     - In the Cloudflare project's dashboard, go to the 'Deployments' tab
     - Select the 'Visit site' link to ensure everything is working as expected
 
 
+
     
-## How to Customize the RSS Feed
+## How to Set Up the Blog Mailing List<a name="how-to-setup-blog"></a>
 - Login to Cloudflare
 - Select 'Workers & Pages' in the left sidebar
 - Select the project application
@@ -79,5 +87,28 @@ This is the repo for my personal website.
         <a href="*|RSSITEM:URL|*">Read more</a> <p><small>Published on *|RSSITEM:DATE|*</small></p>
         ```
     - Click next
-    - Click 'Satrt campaign'
-
+    - Click 'Start campaign'
+- Find the Mailchimp API key and List ID: 
+  - Login to Mailchimp
+  - Get the API Key: 
+    - Click the profile icon and choose Profile
+    - Click the Extras drop-down and then choose API keys
+    - In the Your API Keys section, click Create A Key
+    - Name the key (e.g. Portfolio Blog Email List)
+    - Click Generate Key
+    - Copy the key and save it for the next step (you cannot access this key again, so make sure to save it somewhere you can access it for the next step)
+  - Get the Audience ID:
+    - In the left menu, under the 'Audience' heading, select 'All contacts'
+    - Select the module's 'Settings' drop-down and select 'Audience name & defaults'
+    - Under the Audience ID, copy the Audience ID value
+- Add the Mailchimp API key and List ID to the Cloudflare environment variables: 
+  - Go to the Cloudflare application dashboard
+  - Select the 'Settings' tab
+  - In the Environment Variables -> Production section, select 'Add variables' or 'Edit variables'
+  - Select 'Add variable'
+  - Add the Mailchimp API key
+    - Variable name: MAILCHIMP_API_KEY
+    - Value: *enter variable from previous step*
+  -Add the Mailchimp List ID
+    - Variable name: MAILCHIMP_AUDIENCE_ID
+    - Value: *enter variable from previous step*

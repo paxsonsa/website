@@ -6,6 +6,8 @@ import Link from "next/link";
 
 import Header from "@/components/Header";
 import Subheader from "@/components/Subheader";
+import Subscribe from "@/components/Subscribe";
+
 
 export default function Articles() {
   const postDirectory = "posts";
@@ -43,6 +45,7 @@ export default function Articles() {
       <section className="md:*:max-w-screen-md *:m-auto">
         <ArticleList articles={articles} />
       </section>
+      <Subscribe />
     </>
   );
 }
