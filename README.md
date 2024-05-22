@@ -80,6 +80,22 @@ This is the repo for my personal website.
         - Route: https://andrewpaxson.com/api/subscribe
         - Zone: *select your website project/application name*
         - Select 'Add route'
+      - Copy the "worker's hostname" for the next step.
+    - On the left sidebar, click on Domain Registration:
+      - Add a CNAME record for your domain:
+        - Subdomain: subscribe-worker.andrewpaxson.com
+        - Target: *workers hostname*
+- If the domain is not hosted at Cloudflare - create a 'Partial (CNAME) Setup': 
+  - Go to you domain host and add a CNAME record for the app, with the Cloudflare Page target address
+  - Go to the Cloudflare 'Websites' menu item
+    - Add the root domain
+    - Select the website
+      - Go to the DNS menu item and add a record
+        - Type: CNAME
+        - Name: *same as the new one entered on your domain host*
+        - Target: *same as the one entered on your domain host*
+        - Proxy Status: Proxied
+        - Click save
 - Signup/login to MailChimp
   - Create a campaign: 
     - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
