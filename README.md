@@ -38,6 +38,9 @@ This is the repo for my personal website.
     - Build output directory: out
     - Select the 'Save and Deploy' button
   - Select 'Continue to project' button (after the build/deploy is completed)
+  - Ensure the hardcoded URLs are accurate: 
+    - components/Subscribe.jsx
+    - scripts/generate-rss.js
   - Optional: Set up a custom domain:
     - Go to the 'Custom domains' tab, and enter your custom domain
       - If using a subdomain -> select 'Begin CNAME setup' button
