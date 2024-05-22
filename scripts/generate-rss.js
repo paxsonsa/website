@@ -17,8 +17,6 @@ const generateRSS = () => {
     site_url: siteUrl,
     feed_url: `${siteUrl}/rss.xml`,
   });
-  console.log("RSS GENERATED");
-  console.log("FEED URL: ", `${siteUrl}/rss.xml`);
 
   filenames.forEach((filename) => {
     const filePath = path.join(postDirectory, filename);
@@ -34,8 +32,7 @@ const generateRSS = () => {
   });
 
   const rss = feed.xml({ indent: true });
-  fs.writeFileSync(path.join(process.cwd(), 'public', 'rss.xml'), rss);
-  console.log("DONE");
+  fs.writeFileSync(path.join(process.cwd(), 'out', 'rss.xml'), rss);
 };
 
 generateRSS();
