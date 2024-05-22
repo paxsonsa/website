@@ -25,7 +25,7 @@ This is the repo for my personal website.
 - Login to your GitHub account and fork this repository
 - Create a Cloudflare account and login
   - In the Cloudflare dashboard, select 'Workers and Pages' from the left menu
-  - Select the tab 'Pages' beside 'Workers'
+  - Select the tab 'Pages' (beside 'Workers')
   - Select 'Connect to Git'
     - Connect your GitHub account
     - Select the newly forked repository
@@ -39,54 +39,56 @@ This is the repo for my personal website.
     - Select the 'Save and Deploy' button
   - Select 'Continue to project' button (after the build/deploy is completed)
   - Optional: Set up a custom domain:
-    - Go to the 'Custom domains' tab, and enter a custom domain
+    - Go to the 'Custom domains' tab, and enter your custom domain
       - If using a subdomain -> select 'Begin CNAME setup' button
       - Copy the 'Target'
-      - Login to your DNS provider (website host) and find your website's DNS settings
-      - Add a CNAME record which points to the Cloudflare target address
-      - Select 'Check DNS records"
+      - Login to your website's host dashboard and find your website's DNS settings
+        - For Cloudflare: Go to the Cloudflare dashboard, select 'Websites', select the custom domain you want to use, then go to 'DNS' in the left menu
+        - Select 'Add Record'
+        - Type: CNAME
+        - Name: @
+        - Target: *enter the target value from the previous step
   - Set up the blog mailing list:
-    -If you do not want to set up the blog mailing list:
-      - Remove 'Subscribe' import statement and the 'Subscribe' component invocation (i.e. <Subscribe />) from the following files:
+    - If you do not want to set up the blog mailing list:
+      - Remove 'Subscribe' import statement and 'Subscribe' component invocation (i.e. <Subscribe />) from the following files:
         - app/page.jsx
         - app/articles/page.jsx
         - app/articles/[slug]/page.jsx
     - If you do want to set up the blog mailing list:
       - Follow the [How to Set Up the Blog Mailing List](#how-to-setup-blog) instructions below
-  - Make sure the site works
-    - In the Cloudflare project's dashboard, go to the 'Deployments' tab
-    - Select the 'Visit site' link to ensure everything is working as expected
-
+  - Make sure the site works:
+    - In the Cloudflare project's dashboard, go to the 'Deployments' tab, select the 'Visit site' link to ensure everything is working as expected
+    - If you have set up a custom domain, visit the URL to check if it works
 
 
 ## How to Set Up the Blog Mailing List<a name="how-to-setup-blog"></a>
-* Note: your domain must use Cloudflare's nameservers for the 'Workers' to function (if the website it hosted elsewhere, you will need to change the nameservers to Cloudflare)
+- *Note: your domain must use Cloudflare's nameservers for the 'Workers' to function (if the website is hosted elsewhere then you will need to change the nameservers to Cloudflare)*
 - Create a Cloudflare Worker:
   - Login to Cloudflare
   - Select 'Workers & Pages' in the left sidebar
     - Select 'Create application'
       - In the 'Workers' tab, select 'Create worker'
         - Name: "subscribe-worker'
-        - Click 'Deploy'
-      - Click 'Edit code'
+        - Select 'Deploy'
+      - Select 'Edit code'
         - Delete the existing code
         - Paste in the code from the subscribe-worker.js file (located in the 'Scripts' folder of this repository) 
-        - Click 'Deploy'
+        - Select 'Deploy'
         - Copy the Cloudflare woker endpoint (e.g. 'subscribe-worker.andrewpaxson.workers.com')
-        - Click 'Save and deploy'
+        - Select 'Save and deploy'
 - Setup a Mailchimp RSS Campaign:
   - Signup/login to MailChimp
-  -  Create a campaign: 
-    - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
+    -  Create a campaign: 
+      - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
       - Campaign Name: Share blog updates
-      - Click 'Begin' button
+      - Select 'Begin' button
       - RSS feed URL: *enter your website url + /rss.xml - e.g. https://andrewpaxson.com/rss.xml*
-      - When should we send?: *enter to your preference*
-      - Click Next
+      - When should we send?: *enter as per your preference*
+      - Select Next
       - Select 'Entire audience'
-      - Click next
+      - Select next
       - Modify preferences to your choosing (e.g. connect to Twitter)
-      - Click next
+      - Select next
       - Select a template and design your email - example: 
         - Add a 'Code' section to the email and insert the following code:
         - ```
@@ -94,17 +96,17 @@ This is the repo for my personal website.
           <p>*|RSSITEM:CONTENT|*</p>
           <a href="*|RSSITEM:URL|*">Read more</a> <p><small>Published on *|RSSITEM:DATE|*</small></p>
           ```
-      - Click next
-      - Click 'Start campaign'
+      - Select next
+      - Select 'Start campaign'
 - Connect the Mailchimp Campaign to the Cloudflare Worker:
   - Find the Mailchimp API key and List ID: 
     - Login to Mailchimp
     - Get the API Key: 
-      - Click the profile icon and choose Profile
-      - Click the Extras drop-down and then choose API keys
-      - In the Your API Keys section, click Create A Key
+      - Select the profile icon and choose Profile
+      - Select the Extras drop-down and then choose API keys
+      - In the Your API Keys section, Select Create A Key
       - Name the key (e.g. Portfolio Blog Email List)
-      - Click Generate Key
+      - Select Generate Key
       - Copy the key and save it for the next step (you cannot access this key again, so make sure to save it somewhere you can access it for the next step)
     - Get the Audience ID:
       - In the left menu, under the 'Audience' heading, select 'All contacts'

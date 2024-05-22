@@ -4,8 +4,7 @@ const RSS = require('rss');
 const matter = require('gray-matter');
 
 
-const siteUrl = 'https://michelleflandin.com'
-// Modify site url to: https://andrewpaxson.com
+const siteUrl = 'https://andrewpaxson.com'
 
 const generateRSS = () => {
   const postDirectory = path.join(process.cwd(), 'posts');
