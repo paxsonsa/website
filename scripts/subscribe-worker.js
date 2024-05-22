@@ -1,9 +1,10 @@
 // Note: this code has no direct functionality within this application - it is only reference code to be used in the Cloudflare Worker code section(i.e. subscribe-worker)
 
 
+// Note: this code has no direct functionality within this application - it is only reference code to be used in the Cloudflare Worker code section(i.e. subscribe-worker)
+
+
 async function handleRequest(request) {
-    
-    console.log(MAILCHIMP_API_KEY);
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -31,28 +32,14 @@ async function handleRequest(request) {
                 merge_fields: { FNAME: firstName },
             };
   
-            const API_KEY = env.MAILCHIMP_API_KEY;
-            const AUDIENCE_ID = env.MAILCHIMP_AUDIENCE_ID;
+            const DATACENTER = MAILCHIMP_API_KEY.split('-')[1];
   
-            // Added logging for debugging
-            console.log(`Environment: ${env}`);
-            console.log(`test: ${env.MAILCHIMP_API_KEY}`)
-            console.log("API_KEY:", API_KEY);
-            console.log("AUDIENCE_ID:", AUDIENCE_ID);
-  
-            if (!API_KEY || !API_KEY.includes('-')) {
-                throw new Error('Invalid Mailchimp API key format');
-            }
-  
-            const DATACENTER = API_KEY.split('-')[1];
-            console.log("DATACENTER:", DATACENTER);
-  
-            const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
+            const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members`;
   
             const response = await fetch(url, {
                 body: JSON.stringify(data),
                 headers: {
-                    Authorization: `apikey ${API_KEY}`,
+                    Authorization: `apikey ${MAILCHIMP_API_KEY}`,
                     'Content-Type': 'application/json',
                 },
                 method: 'POST',
