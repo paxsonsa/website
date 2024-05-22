@@ -21,7 +21,7 @@ This is the repo for my personal website.
 ```
 
 
-## How to Deploy on Cloudflare
+## How to Deploy Website on Cloudflare
 - Login to your GitHub account and fork this repository
 - Create a Cloudflare account and login
   - In the Cloudflare dashboard, select 'Workers and Pages' from the left menu
@@ -46,12 +46,12 @@ This is the repo for my personal website.
       - Add a CNAME record which points to the Cloudflare target address
       - Select 'Check DNS records"
   - Set up the blog mailing list:
-    -If you DO NOT want to set up the blog mailing list:
+    -If you do not want to set up the blog mailing list:
       - Remove 'Subscribe' import statement and the 'Subscribe' component invocation (i.e. <Subscribe />) from the following files:
         - app/page.jsx
         - app/articles/page.jsx
         - app/articles/[slug]/page.jsx
-    - If you DO want to set up the blog mailing list:
+    - If you do want to set up the blog mailing list:
       - Follow the [How to Set Up the Blog Mailing List](#how-to-setup-blog) instructions below
   - Make sure the site works
     - In the Cloudflare project's dashboard, go to the 'Deployments' tab
@@ -59,7 +59,6 @@ This is the repo for my personal website.
 
 
 
-    
 ## How to Set Up the Blog Mailing List<a name="how-to-setup-blog"></a>
 * Note: your domain must use Cloudflare's nameservers for the 'Workers' to function (if the website it hosted elsewhere, you will need to change the nameservers to Cloudflare)
 - Create a Cloudflare Worker:

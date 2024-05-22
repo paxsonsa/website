@@ -9,29 +9,39 @@ const Subscribe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Modify URL to: 'https://andrewpaxson.com/api/subscribe'
-    const res = await fetch('https://michelleflandin.com/api/subscribe', {
-      body: JSON.stringify({ email, firstName }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    });    
-
-    if (!res.ok) {
+    
+    if (!email || !firstName) {
       setStatus('error');
       return;
     }
 
-    const data = await res.json();
-    if (data.error) {
-      setStatus('error');
-      return;
-    }
+    try {
+      const res = await fetch('https://michelleflandin.com/api/subscribe', {
+        body: JSON.stringify({ email, firstName }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
 
-    setStatus('success');
-    setEmail('');
-    setFirstName('');
+      if (!res.ok) {
+        setStatus('error');
+        return;
+      }
+
+      const data = await res.json();
+      if (data.error) {
+        setStatus('error');
+        return;
+      }
+
+      setStatus('success');
+      setEmail('');
+      setFirstName('');
+    } catch (error) {
+      console.error('Error:', error);
+      setStatus('error');
+    }
   };
 
   return (
