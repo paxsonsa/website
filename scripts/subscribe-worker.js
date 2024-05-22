@@ -1,5 +1,9 @@
 // Note: this code has no direct functionality within this application - it is only reference code to be used in the Cloudflare Worker code section(i.e. subscribe-worker)
-async function handleRequest(request, env) {
+
+
+async function handleRequest(request) {
+    
+    console.log(MAILCHIMP_API_KEY);
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST, OPTIONS',

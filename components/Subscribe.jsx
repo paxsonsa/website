@@ -65,7 +65,7 @@ const Subscribe = () => {
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white px-3 py-2 rounded-md shadow hover:bg-blue-600"
+          className="w-full bg-sky-500 text-white px-3 py-2 rounded-md shadow hover:bg-sky-600 dark:bg-sky-400 dark:hover:bg-sky-500"
         >
           Subscribe
         </button>
