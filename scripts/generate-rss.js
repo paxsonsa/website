@@ -4,7 +4,7 @@ const RSS = require('rss');
 const matter = require('gray-matter');
 
 
-const siteUrl = 'https://ap-demo.michellef.dev'
+const siteUrl = 'https://michelleflandin.com'
 // Modify site url to: https://andrewpaxson.com
 
 const generateRSS = () => {

@@ -61,6 +61,7 @@ This is the repo for my personal website.
 
     
 ## How to Set Up the Blog Mailing List<a name="how-to-setup-blog"></a>
+* Note: your domain must use Cloudflare's nameservers for the 'Workers' to function (if the website it hosted elsewhere, you will need to change the nameservers to Cloudflare)
 - Login to Cloudflare
 - Select 'Workers & Pages' in the left sidebar
   - Select 'Create application'
@@ -73,29 +74,6 @@ This is the repo for my personal website.
       - Click 'Deploy'
       - Copy the Cloudflare woker endpoint (e.g. 'subscribe-worker.andrewpaxson.workers.com')
       - Click 'Save and deploy'
-    - On the left sidebar, click on "Workers & Pages" and then select "Workers"
-      - Find the Worker you deployed (subscribe-worker) and click on it
-      - Go to the "Settings" tab and select 'Triggers' from the section's left internal menu
-      - Select 'Add route'
-        - Route: https://andrewpaxson.com/api/subscribe
-        - Zone: *select your website project/application name*
-        - Select 'Add route'
-      - Copy the "worker's hostname" for the next step.
-    - On the left sidebar, click on Domain Registration:
-      - Add a CNAME record for your domain:
-        - Subdomain: subscribe-worker.andrewpaxson.com
-        - Target: *workers hostname*
-- If the domain is not hosted at Cloudflare - create a 'Partial (CNAME) Setup': 
-  - Go to you domain host and add a CNAME record for the app, with the Cloudflare Page target address
-  - Go to the Cloudflare 'Websites' menu item
-    - Add the root domain
-    - Select the website
-      - Go to the DNS menu item and add a record
-        - Type: CNAME
-        - Name: *same as the new one entered on your domain host*
-        - Target: *same as the one entered on your domain host*
-        - Proxy Status: Proxied
-        - Click save
 - Signup/login to MailChimp
   - Create a campaign: 
     - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
