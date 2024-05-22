@@ -43,7 +43,7 @@ This is the repo for my personal website.
       - If using a subdomain -> select 'Begin CNAME setup' button
       - Copy the 'Target'
       - Login to your website's host dashboard and find your website's DNS settings
-        - For Cloudflare: Go to the Cloudflare dashboard, select 'Websites', select the custom domain you want to use, then go to 'DNS' in the left menu
+        - For Cloudflare: Go to the Cloudflare dashboard, select 'Websites', select the custom domain you want to use, then go to 'DNS' in the left sidebar
         - Select 'Add Record'
         - Type: CNAME
         - Name: @
@@ -109,11 +109,11 @@ This is the repo for my personal website.
       - Select Generate Key
       - Copy the key and save it for the next step (you cannot access this key again, so make sure to save it somewhere you can access it for the next step)
     - Get the Audience ID:
-      - In the left menu, under the 'Audience' heading, select 'All contacts'
+      - In the left sidebar, under the 'Audience' heading, select 'All contacts'
       - Select the module's 'Settings' drop-down and select 'Audience name & defaults'
       - Under the Audience ID, copy the Audience ID value
   - Add the Mailchimp API key and List ID to the Cloudflare Worker's environment variables: 
-    - Go to Cloudflare and select 'Workers & Pages' from the left side menu
+    - Go to Cloudflare and select 'Workers & Pages' from the left side sidebar
     - Select the subscribe-worker
     - Go to the 'Settings' tab
     - In the Environment Variables -> Production section, select 'Add variables' or 'Edit variables'
