@@ -62,20 +62,22 @@ This is the repo for my personal website.
     
 ## How to Set Up the Blog Mailing List<a name="how-to-setup-blog"></a>
 * Note: your domain must use Cloudflare's nameservers for the 'Workers' to function (if the website it hosted elsewhere, you will need to change the nameservers to Cloudflare)
-- Login to Cloudflare
-- Select 'Workers & Pages' in the left sidebar
-  - Select 'Create application'
-    - In the 'Workers' tab, select 'Create worker'
-      - Name: "subscribe-worker'
-      - Click 'Deploy'
-    - Click 'Edit code'
-      - Delete the existing code
-      - Paste in the code from the subscribe-worker.js file (located in the 'Scripts' folder of this repository) 
-      - Click 'Deploy'
-      - Copy the Cloudflare woker endpoint (e.g. 'subscribe-worker.andrewpaxson.workers.com')
-      - Click 'Save and deploy'
-- Signup/login to MailChimp
-  - Create a campaign: 
+- Create a Cloudflare Worker:
+  - Login to Cloudflare
+  - Select 'Workers & Pages' in the left sidebar
+    - Select 'Create application'
+      - In the 'Workers' tab, select 'Create worker'
+        - Name: "subscribe-worker'
+        - Click 'Deploy'
+      - Click 'Edit code'
+        - Delete the existing code
+        - Paste in the code from the subscribe-worker.js file (located in the 'Scripts' folder of this repository) 
+        - Click 'Deploy'
+        - Copy the Cloudflare woker endpoint (e.g. 'subscribe-worker.andrewpaxson.workers.com')
+        - Click 'Save and deploy'
+- Setup a Mailchimp RSS Campaign:
+  - Signup/login to MailChimp
+  -  Create a campaign: 
     - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
       - Campaign Name: Share blog updates
       - Click 'Begin' button
@@ -95,6 +97,7 @@ This is the repo for my personal website.
           ```
       - Click next
       - Click 'Start campaign'
+- Connect the Mailchimp Campaign to the Cloudflare Worker:
   - Find the Mailchimp API key and List ID: 
     - Login to Mailchimp
     - Get the API Key: 
