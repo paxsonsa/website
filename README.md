@@ -94,10 +94,11 @@ This is the repo for my personal website.
       - Select next
       - Select a template and design your email - example: 
         - Add a 'Code' section to the email and insert the following code:
-        - ```
+        - ```html
           <h2>*|RSSITEM:TITLE|*</h2>
           <p>*|RSSITEM:CONTENT|*</p>
-          <a href="*|RSSITEM:URL|*">Read more</a> <p><small>Published on *|RSSITEM:DATE|*</small></p>
+          <a href="*|RSSITEM:URL|*">Read more</a>
+          <p><small>Published on *|RSSITEM:DATE|*</small></p>
           ```
       - Select next
       - Select 'Start campaign'
