@@ -85,7 +85,8 @@ This is the repo for my personal website.
       - Select the profile icon
       - Select Profile 
       - Go to the 'Settings' dropdown and select 'Details'
-      - Update the Timezone field
+      - Update the Timezone field (e.g. '(GMT-07:00) Vancouver')
+      - Select 'Save' 
     -  Create an RSS campaign: 
       - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
       - Campaign Name: Share blog updates
@@ -105,7 +106,7 @@ This is the repo for my personal website.
       - Design: 
         - Design the email layout and content  
           - Example: 
-            - Select the 'It's time to design your email.' text and edit it to your blog header
+            - Select the 'It's time to design your email.' text and edit it to your blog header (e.g. "Check out my new blog post") , and select 'Save and close' button
             - Select the middle content blog (i.e. "Now that you've selected your template...") and delete it
             - Add a 'Code' content block to the body section
             - Insert the following code into the new code content block:
