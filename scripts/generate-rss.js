@@ -3,8 +3,7 @@ const path = require('path');
 const RSS = require('rss');
 const matter = require('gray-matter');
 
-
-const siteUrl = 'https://andrewpaxson.com'
+const siteUrl = 'https://michelleflandin.com'
 
 const generateRSS = () => {
   const postDirectory = path.join(process.cwd(), 'posts');
@@ -22,12 +21,15 @@ const generateRSS = () => {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data } = matter(fileContents);
 
-    feed.item({
-      title: data.title,
-      description: data.description,
-      url: `${siteUrl}/articles/${filename.replace('.mdx', '')}`,
-      date: data.date,
-    });
+    // Check if the post is hidden
+    if (!data.hidden) {
+      feed.item({
+        title: data.title,
+        description: data.description,
+        url: `${siteUrl}/articles/${filename.replace('.mdx', '')}`,
+        date: data.date,
+      });
+    }
   });
 
   const rss = feed.xml({ indent: true });
