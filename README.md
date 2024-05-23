@@ -110,7 +110,7 @@ This is the repo for my personal website.
             - Select the middle content blog (i.e. "Now that you've selected your template...") and delete it
             - Add a 'Code' content block to the body section
             - Insert the following code into the new code content block:
-              - ```html
+              ```html
               <h2>*|RSSITEM:TITLE|*</h2>
               <p>*|RSSITEM:CONTENT|*</p>
               <a href="*|RSSITEM:URL|*">Read more</a>
