@@ -3,7 +3,7 @@ const path = require('path');
 const RSS = require('rss');
 const matter = require('gray-matter');
 
-const siteUrl = 'https://michelleflandin.com'
+const siteUrl = 'https://andrewpaxson.com'
 
 process.env.TZ = 'America/Los_Angeles'; 
 

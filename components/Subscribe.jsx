@@ -16,7 +16,7 @@ const Subscribe = () => {
     }
 
     try {
-      const res = await fetch('https://michelleflandin.com/api/subscribe', {
+      const res = await fetch('https://andrewpaxson.com/api/subscribe', {
         body: JSON.stringify({ email, firstName }),
         headers: {
           'Content-Type': 'application/json',
