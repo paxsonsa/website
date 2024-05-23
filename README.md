@@ -53,7 +53,7 @@ This is the repo for my personal website.
         - Target: *enter the target value from the previous step
   - Set up the blog mailing list:
     - If you do not want to set up the blog mailing list:
-      - Remove 'Subscribe' import statement and 'Subscribe' component invocation (i.e. <Subscribe />) from the following files:
+      - Remove 'Subscribe' import statement and 'Subscribe' component invocation (i.e., <Subscribe />) from the following files:
         - app/page.jsx
         - app/articles/page.jsx
         - app/articles/[slug]/page.jsx
@@ -77,7 +77,7 @@ This is the repo for my personal website.
         - Delete the existing code
         - Paste in the code from the subscribe-worker.js file (located in the 'Scripts' folder of this repository) 
         - Select 'Deploy'
-        - Copy the Cloudflare woker endpoint (e.g. 'subscribe-worker.andrewpaxson.workers.com')
+        - Copy the Cloudflare woker endpoint (e.g., 'subscribe-worker.andrewpaxson.workers.com')
         - Select 'Save and deploy'
 - Setup a Mailchimp RSS Campaign:
   - Signup/login to MailChimp
@@ -85,29 +85,29 @@ This is the repo for my personal website.
       - Select the profile icon
       - Select Profile 
       - Go to the 'Settings' dropdown and select 'Details'
-      - Update the Timezone field (e.g. '(GMT-07:00) Vancouver')
+      - Update the Timezone field (e.g., '(GMT-07:00) Vancouver')
       - Select 'Save' 
     -  Create an RSS campaign: 
       - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
       - Campaign Name: Share blog updates
       - Select 'Begin' button
       - RSS feed and send timing:
-        - URL: *enter your website url + /rss.xml - e.g. https://andrewpaxson.com/rss.xml*
+        - URL: *enter your website url + /rss.xml - e.g., https://andrewpaxson.com/rss.xml*
         - When should we send?: *enter as per your preference*
         - Select Next
       - Recipients:
         - Select 'Entire audience'
         - Select next
       - Setup:
-        - Modify preferences to your choosing (e.g. connect to Twitter)
+        - Modify preferences to your choosing (e.g., connect to Twitter)
         - Select next
       - Template:
-        - Select a template (e.g. 'Simple Text') 
+        - Select a template (e.g., 'Simple Text') 
       - Design: 
         - Design the email layout and content  
           - Example: 
-            - Select the 'It's time to design your email.' text and edit it to your blog header (e.g. "Check out my new blog post") , and select 'Save and close' button
-            - Select the middle content blog (i.e. "Now that you've selected your template...") and delete it
+            - Select the 'It's time to design your email.' text and edit it to your blog header (e.g., "Check out my new blog post") , and select 'Save and close' button
+            - Select the middle content blog (i.e., "Now that you've selected your template...") and delete it
             - Add a 'Code' content block to the body section
             - Insert the following code into the new code content block:
               ```html
@@ -126,7 +126,7 @@ This is the repo for my personal website.
       - Select the profile icon and choose Profile
       - Select the Extras drop-down and then choose API keys
       - In the Your API Keys section, Select Create A Key
-      - Name the key (e.g. Portfolio Blog Email List)
+      - Name the key (e.g., Portfolio Blog Email List)
       - Select Generate Key
       - Copy the key and save it for the next step (you cannot access this key again, so make sure to save it somewhere you can access it for the next step)
     - Get the Audience ID:
