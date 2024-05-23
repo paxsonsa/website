@@ -5,6 +5,8 @@ const matter = require('gray-matter');
 
 const siteUrl = 'https://michelleflandin.com'
 
+process.env.TZ = 'America/Los_Angeles'; 
+
 const generateRSS = () => {
   const postDirectory = path.join(process.cwd(), 'posts');
   const filenames = fs.readdirSync(postDirectory);
@@ -21,13 +23,13 @@ const generateRSS = () => {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data } = matter(fileContents);
 
-    // Check if the post is hidden
     if (!data.hidden) {
+      const pubDate = new Date(data.date);  
       feed.item({
         title: data.title,
         description: data.description,
         url: `${siteUrl}/articles/${filename.replace('.mdx', '')}`,
-        date: data.date,
+        date: pubDate.toISOString(),  
       });
     }
   });

@@ -81,27 +81,43 @@ This is the repo for my personal website.
         - Select 'Save and deploy'
 - Setup a Mailchimp RSS Campaign:
   - Signup/login to MailChimp
-    -  Create a campaign: 
+    - Optional: Change profile timezone: 
+      - Select the profile icon
+      - Select Profile 
+      - Go to the 'Settings' dropdown and select 'Details'
+      - Update the Timezone field
+    -  Create an RSS campaign: 
       - Go to this [MailChimp URL](https://us22.admin.mailchimp.com/campaigns/#/create-campaign/explore/rss)
       - Campaign Name: Share blog updates
       - Select 'Begin' button
-      - RSS feed URL: *enter your website url + /rss.xml - e.g. https://andrewpaxson.com/rss.xml*
-      - When should we send?: *enter as per your preference*
-      - Select Next
-      - Select 'Entire audience'
-      - Select next
-      - Modify preferences to your choosing (e.g. connect to Twitter)
-      - Select next
-      - Select a template and design your email - example: 
-        - Add a 'Code' section to the email and insert the following code:
-        - ```html
-          <h2>*|RSSITEM:TITLE|*</h2>
-          <p>*|RSSITEM:CONTENT|*</p>
-          <a href="*|RSSITEM:URL|*">Read more</a>
-          <p><small>Published on *|RSSITEM:DATE|*</small></p>
-          ```
-      - Select next
-      - Select 'Start campaign'
+      - RSS feed and send timing:
+        - URL: *enter your website url + /rss.xml - e.g. https://andrewpaxson.com/rss.xml*
+        - When should we send?: *enter as per your preference*
+        - Select Next
+      - Recipients:
+        - Select 'Entire audience'
+        - Select next
+      - Setup:
+        - Modify preferences to your choosing (e.g. connect to Twitter)
+        - Select next
+      - Template:
+        - Select a template (e.g. 'Simple Text') 
+      - Design: 
+        - Design the email layout and content  
+          - Example: 
+            - Select the 'It's time to design your email.' text and edit it to your blog header
+            - Select the middle content blog (i.e. "Now that you've selected your template...") and delete it
+            - Add a 'Code' content block to the body section
+            - Insert the following code into the new code content block:
+              - ```html
+              <h2>*|RSSITEM:TITLE|*</h2>
+              <p>*|RSSITEM:CONTENT|*</p>
+              <a href="*|RSSITEM:URL|*">Read more</a>
+              <p><small>Published on *|RSSITEM:DATE|*</small></p>
+              ```
+        - Select next
+      - Review campaign and select 'Start RSS' 
+      - Select 'Start Campaign' to complete process
 - Connect the Mailchimp Campaign to the Cloudflare Worker:
   - Find the Mailchimp API key and List ID: 
     - Login to Mailchimp
