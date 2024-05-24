@@ -22,7 +22,7 @@ This is the repo for my personal website.
 
 
 ## How to Deploy Website on Cloudflare
-- Login to your GitHub account and fork this repository
+- Login to GitHub and fork this repository
 - Create a Cloudflare account and login
   - In the Cloudflare dashboard, select 'Workers and Pages' from the left menu
   - Select the tab 'Pages' (beside 'Workers')
