@@ -10,6 +10,7 @@ import rehypeHighlight from "rehype-highlight";
 import "@/styles/highlightjs/catppuccin-mocha.css";
 import Header from "@/components/Header";
 import Subheader from "@/components/Subheader";
+import Subscribe from "@/components/Subscribe";
 
 const options = {
   mdxOptions: {
@@ -88,6 +89,9 @@ export default function Page({ params }) {
           >
             See All Articles
           </Link>
+        </div>
+        <div className="max-w-screen-md m-auto pt-8">
+          <Subscribe />
         </div>
       </div>
     </>

@@ -7,6 +7,9 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 
   output: "export",
+  env: {
+    SITE_URL: process.env.SITE_URL,
+  },
 };
 
 const withMDX = createMDX({

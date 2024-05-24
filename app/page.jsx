@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import Header from "../components/Header";
+import Subscribe from "../components/Subscribe";
+
 import { GithubCircle, Linkedin, X } from "iconoir-react";
 
 export default function Home() {
@@ -91,6 +93,9 @@ export default function Home() {
             </>
           }
         />
+      </div>
+      <div className="md:max-w-screen-md m-auto pt-8">
+        <Subscribe />
       </div>
     </>
   );
