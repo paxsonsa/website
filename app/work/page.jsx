@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import Header from "@/components/Header";
 import Subheader from "@/components/Subheader";
+import Footer from "@/components/Footer";
 
 export default function Projects() {
   return (
@@ -22,11 +23,12 @@ export default function Projects() {
         </p>
         <Link
           className="mt-4 text-semibold text-sm text-sky-500 hover:underline"
-          href="/articles"
+          href="https://andrewpaxson.substack.com"
         >
           Checkout my blog while you are here!
         </Link>
       </section>
+      <Footer />
     </>
   );
 }

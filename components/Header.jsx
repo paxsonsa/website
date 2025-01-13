@@ -27,7 +27,7 @@ export default function Header({ sticky }) {
             <Link href="/work">Work</Link>
           </li>
           <li key="articles">
-            <Link href="/articles">Articles</Link>
+            <Link href="https://andrewpaxson.substack.com">Articles</Link>
           </li>
         </ul>
       </nav>

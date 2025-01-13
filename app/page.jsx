@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import Header from "../components/Header";
-import { GithubCircle, Linkedin, X } from "iconoir-react";
+import Footer from "../components/Footer";
+import { GithubCircle, Linkedin, X, Youtube } from "iconoir-react";
 
 export default function Home() {
   return (
@@ -34,6 +35,13 @@ export default function Home() {
             >
               <Linkedin />
             </Link>
+            <Link
+              className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"
+              href="https://www.youtube.com/channel/UCl1JA8NsoeGxRGHxE8Z0T9Q"
+            >
+              <Youtube />
+            </Link>
+
           </div>
         </div>
       </section>
@@ -92,6 +100,7 @@ export default function Home() {
           }
         />
       </div>
+      <Footer />
     </>
   );
 }
