@@ -74,7 +74,7 @@ function ArticleList({ articles }) {
           >
             <Link
               className="text-2xl hover:underline dark:font-medium"
-              href={`/articles/${article.slug}`}
+              href={`/articles/${encodeURIComponent(article.slug)}`}
             >
               <h2>{article.meta.title}</h2>
             </Link>
@@ -84,7 +84,7 @@ function ArticleList({ articles }) {
             <HeroImage imageUrl={article.meta.image} />
             <p className="pr-16 my-4">{article.meta.description}</p>
             <Link
-              href={`/articles/${article.slug}`}
+              href={`/articles/${encodeURIComponent(article.slug)}`}
               className="text-sky-500 dark:text-sky-400 dark:font-normal font-medium text-sm hover:underline"
             >
               Read More
