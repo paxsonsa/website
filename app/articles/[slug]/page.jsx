@@ -19,14 +19,12 @@ const options = {
 };
 
 export async function generateStaticParams() {
-  console.log("!!!! Generating static paths");
   const files = fs.readdirSync(path.join("posts"));
   const paths = files
     .filter((filename) => filename.endsWith(".mdx"))
     .map((filename) => ({
       slug: filename.replace(".mdx", ""),
     }));
-  console.log("Generated static paths", paths);
 
   return paths;
 }
@@ -42,7 +40,8 @@ function getPost({ slug }) {
 }
 
 export async function generateMetadata({ params }) {
-  const blog = getPost(params);
+  const resolvedParams = await params;
+  const blog = getPost(resolvedParams);
   return {
     metadataBase: new URL('https://andrewpaxson.com'),
     title: `${blog.frontMatter.title}`,
@@ -54,9 +53,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function Page({ params }) {
-  console.log(params);
-  const props = getPost(params);
+export default async function Page({ params }) {
+  const resolvedParams = await params;
+  const props = getPost(resolvedParams);
 
   const date = new Date(props.frontMatter.date);
   const options = { year: "numeric", month: "short", day: "2-digit" };
