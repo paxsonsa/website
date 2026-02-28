@@ -1,121 +1,161 @@
 import Link from "next/link";
 
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { GithubCircle, Linkedin, X, Youtube } from "iconoir-react";
+
+const credentials = [
+  {
+    label: "Experience",
+    value: "10+ years shipping products for creative teams",
+  },
+  {
+    label: "Current Role",
+    value: "Staff Engineer at Industrial Light & Magic",
+  },
+  {
+    label: "Operating Scope",
+    value: "Hands-on from discovery through deployment",
+  },
+];
+
+const sections = [
+  {
+    title: "Build strategy and execution end to end",
+    intro:
+      "I translate product goals into shipped systems by combining design leadership with production-grade engineering.",
+    points: [
+      "Lead product direction with stakeholders, then implement critical paths in code.",
+      "Own architecture decisions across UX, APIs, and infrastructure.",
+      "Balance long-term platform health with near-term delivery goals.",
+    ],
+  },
+  {
+    title: "Design for high-complexity creative workflows",
+    intro:
+      "I focus on clarity and speed for tools used by artists and production teams every day.",
+    points: [
+      "Simplify complex data and workflows into usable, dependable interfaces.",
+      "Partner closely with users to validate assumptions and reduce rework.",
+      "Ship practical improvements that increase collaboration across teams.",
+    ],
+  },
+  {
+    title: "Lead globally distributed teams",
+    intro:
+      "I help small cross-functional teams operate with strong alignment and steady execution.",
+    points: [
+      "Coordinate priorities across engineering, design, and production stakeholders.",
+      "Create decision frameworks that keep teams moving without sacrificing quality.",
+      "Coach engineers and designers while maintaining delivery momentum.",
+    ],
+  },
+];
+
+const socialLinks = [
+  {
+    href: "https://twitter.com/MrPaxson",
+    label: "X",
+    icon: X,
+  },
+  {
+    href: "https://github.com/paxsonsa",
+    label: "GitHub",
+    icon: GithubCircle,
+  },
+  {
+    href: "https://www.linkedin.com/in/andrewpaxson",
+    label: "LinkedIn",
+    icon: Linkedin,
+  },
+  {
+    href: "https://www.youtube.com/channel/UCl1JA8NsoeGxRGHxE8Z0T9Q",
+    label: "YouTube",
+    icon: Youtube,
+  },
+];
 
 export default function Home() {
   return (
     <>
       <Header sticky />
-      <section className="flex flex-col items-center p-8 my-24 md:my-2 md:mt-8">
-        <div className="flex flex-col items-center m-auto text-neutral-900 dark:text-white">
-          <h1 className="text-4xl text-center font-bold">
-            Hello,{"  "}I'm Andrew!
+      <section className="mx-auto mt-10 md:mt-16 w-full max-w-5xl px-6 md:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-medium uppercase tracking-[0.18em] text-neutral-500">
+            Product Design + Engineering Leadership
+          </p>
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-neutral-900 md:text-5xl dark:text-white">
+            I design and ship products that help creative teams move faster.
           </h1>
-          <h2 className="font-light text-xl p-4 text-neutral-700 dark:text-neutral-200 dark:font-medium">
-            Product Designer | Engineer
-          </h2>
-          <div className="flex space-x-4 pt-2">
+          <p className="mt-5 text-lg leading-relaxed text-neutral-700 dark:text-neutral-200">
+            I am Andrew Paxson, a product designer and software engineer with
+            over a decade of experience building tools for artists and
+            production teams. I currently serve as a Staff Engineer at{" "}
+            <Link className="font-semibold hover:underline" href="https://ilm.com">
+              Industrial Light & Magic
+            </Link>
+            .
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
-              className="p-2 hover:bg-zinc-800 hover:text-zinc-100 dark:text-neutral-400 dark:hover:bg-neutral-800 rounded"
-              href="https://twitter.com/MrPaxson"
+              href="/work"
+              className="rounded-lg bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
             >
-              <X />
+              View Work
             </Link>
             <Link
-              className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"
-              href="https://github.com/paxsonsa"
+              href="https://andrewpaxson.substack.com"
+              className="rounded-lg border border-neutral-300 px-5 py-3 text-sm font-semibold text-neutral-800 transition hover:border-neutral-500 dark:border-neutral-600 dark:text-neutral-100 dark:hover:border-neutral-400"
             >
-              <GithubCircle />
+              Read Articles
             </Link>
-            <Link
-              className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"
-              href="https://www.linkedin.com/in/andrewpaxson"
-            >
-              <Linkedin />
-            </Link>
-            <Link
-              className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"
-              href="https://www.youtube.com/channel/UCl1JA8NsoeGxRGHxE8Z0T9Q"
-            >
-              <Youtube />
-            </Link>
-
+          </div>
+          <dl className="mt-8 grid w-full max-w-3xl grid-cols-1 divide-y divide-neutral-200 border-y border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {credentials.map((credential) => (
+              <div key={credential.label} className="px-4 py-4 text-center sm:px-5">
+                <dt className="text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400">
+                  {credential.label}
+                </dt>
+                <dd className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-200">
+                  {credential.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-6 flex justify-center space-x-2 pt-2">
+            {socialLinks.map(({ href, label, icon: Icon }) => (
+              <Link
+                key={label}
+                className="rounded p-2 text-neutral-700 transition hover:bg-zinc-800 hover:text-zinc-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+                href={href}
+                aria-label={label}
+              >
+                <Icon />
+              </Link>
+            ))}
           </div>
         </div>
       </section>
-      <div className="md:justify-center md:items-start md:max-w-screen-md md:m-auto">
-        <Section
-          title="I build products that help creative teams be better."
-          content={
-            <>
-              I'm a product designer and software engineer with over a decade
-              experience building things for creative teams. I am currently a
-              Staff Engineer at{" "}
-              {
-                <Link
-                  className="font-semibold hover:underline"
-                  href="https://ilm.com"
-                >
-                  Industrial Light & Magic
-                </Link>
-              }
-              , where I have led the design and engineering of multiple products
-              that improve creative workflows and teams by making them more
-              collaborative, global, and focused on what they do best, creating.
-            </>
-          }
-        />
-        <Section
-          title="Experience building from concept to deployment"
-          content={
-            <>
-              I have a unique skillset and experience as a designer doubling as
-              a software engineer. I have designed and written low-level systems
-              such as software build, distribution and packaging systems to
-              higher level tooling for creative workflows and UIs for artists.
-              This has given me the ability to take a product from conception to
-              full deployment and evolution by directly participating the entire
-              process from top to bottom; This includes getting my hands dirty
-              with code, coordinating infrastruture, strategy and business
-              design with leadership, and interacting with users and
-              stakeholders to ensure the product is always exactly what they
-              need.
-            </>
-          }
-        />
-        <Section
-          title="I lead global teams to succcess"
-          content={
-            <>
-              I am responsible for leading a small global team of engineers and
-              designers to build and maintain a critical suite of products that
-              are used by artists and production teams to share and manage data
-              (images, 3D models, files, etc) across the globe. This requires me
-              communicate and coordinate with a large number stakeholders to
-              ensure our product suite is always meeting the needs of the studio
-              and artists.
-            </>
-          }
-        />
-      </div>
-      <Footer />
-    </>
-  );
-}
 
-function Section({ title, content }) {
-  return (
-    <section className="flex flex-col justify-center text-center items-center my-12 md:my-2 flex-1">
-      <div className="flex flex-col justify-center items-center m-auto p-8 space-y-4">
-        <h3 className="text-xl font-semibold dark:font-bold dark:text-neutral-50">
-          {title}
-        </h3>
-        <p className="text-lg dark:font-light dark:text-neutral-100">
-          {content}
-        </p>
-      </div>
-    </section>
+      <section className="mx-auto my-12 md:my-16 grid w-full max-w-5xl gap-5 px-6 md:grid-cols-3 md:px-8">
+        {sections.map((section) => (
+          <article
+            key={section.title}
+            className="rounded-xl border border-neutral-200 bg-white p-6 text-left shadow-sm dark:border-neutral-800 dark:bg-neutral-950"
+          >
+            <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+              {section.title}
+            </h2>
+            <p className="mt-3 text-base leading-7 text-neutral-700 dark:text-neutral-300">
+              {section.intro}
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+              {section.points.map((point) => (
+                <li key={point}>• {point}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </section>
+    </>
   );
 }
