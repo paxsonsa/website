@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function Header({ sticky }) {
-  console.log(sticky);
   let withSticky = "";
   if (sticky) {
     withSticky = "sticky top-0";
