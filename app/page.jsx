@@ -3,10 +3,19 @@ import Link from "next/link";
 import Header from "../components/Header";
 import { GithubCircle, Linkedin, X, Youtube } from "iconoir-react";
 
-const highlights = [
-  "10+ years shipping products for creative teams",
-  "Staff Engineer at Industrial Light & Magic",
-  "Hands-on from discovery through deployment",
+const credentials = [
+  {
+    label: "Experience",
+    value: "10+ years shipping products for creative teams",
+  },
+  {
+    label: "Current Role",
+    value: "Staff Engineer at Industrial Light & Magic",
+  },
+  {
+    label: "Operating Scope",
+    value: "Hands-on from discovery through deployment",
+  },
 ];
 
 const sections = [
@@ -100,16 +109,18 @@ export default function Home() {
               Read Articles
             </Link>
           </div>
-          <ul className="mt-8 flex flex-wrap justify-center gap-2">
-            {highlights.map((item) => (
-              <li
-                key={item}
-                className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200"
-              >
-                {item}
-              </li>
+          <dl className="mt-8 grid w-full max-w-3xl grid-cols-1 divide-y divide-neutral-200 border-y border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {credentials.map((credential) => (
+              <div key={credential.label} className="px-4 py-4 text-center sm:px-5">
+                <dt className="text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400">
+                  {credential.label}
+                </dt>
+                <dd className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-200">
+                  {credential.value}
+                </dd>
+              </div>
             ))}
-          </ul>
+          </dl>
           <div className="mt-6 flex justify-center space-x-2 pt-2">
             {socialLinks.map(({ href, label, icon: Icon }) => (
               <Link
