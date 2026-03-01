@@ -109,10 +109,10 @@ export default function Home() {
               Read Articles
             </Link>
           </div>
-          <dl className="mt-8 grid w-full max-w-3xl grid-cols-1 divide-y divide-neutral-200 border-y border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <dl className="mt-9 grid w-full max-w-3xl grid-cols-1 gap-5 text-left sm:grid-cols-3 sm:text-center">
             {credentials.map((credential) => (
-              <div key={credential.label} className="px-4 py-4 text-center sm:px-5">
-                <dt className="text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400">
+              <div key={credential.label} className="border-l border-neutral-200 pl-4 sm:border-l-0 sm:border-t sm:border-neutral-200 sm:px-3 sm:pt-4 dark:border-neutral-800">
+                <dt className="text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">
                   {credential.label}
                 </dt>
                 <dd className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-200">
