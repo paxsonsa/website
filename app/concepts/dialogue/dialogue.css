@@ -98,6 +98,24 @@
   animation: breathe 8s ease-in-out infinite;
 }
 
+/* --- Gradient cloud pass — irregular brightness swell --- */
+@keyframes cloudPass {
+  0%   { opacity: var(--bloom-opacity, 1); }
+  12%  { opacity: var(--bloom-opacity, 1); }
+  18%  { opacity: calc(var(--bloom-opacity, 1) * 1.25); }
+  26%  { opacity: var(--bloom-opacity, 1); }
+  45%  { opacity: var(--bloom-opacity, 1); }
+  52%  { opacity: calc(var(--bloom-opacity, 1) * 1.18); }
+  58%  { opacity: calc(var(--bloom-opacity, 1) * 1.30); }
+  65%  { opacity: calc(var(--bloom-opacity, 1) * 1.12); }
+  72%  { opacity: var(--bloom-opacity, 1); }
+  100% { opacity: var(--bloom-opacity, 1); }
+}
+
+.gradient-cloud-pass {
+  animation: cloudPass 30s ease-in-out infinite;
+}
+
 /* --- Teal accent pulse --- */
 @keyframes tealPulse {
   0%, 100% { opacity: 1; }
@@ -227,31 +245,31 @@
     radial-gradient(ellipse 60% 80% at 65% 55%, rgba(55, 48, 163, 0.12) 0%, transparent 55%);
 }
 
-/* Dark mode gradients — deeper colors, lower opacity */
+/* Dark mode gradients — subtle glow against dark bg */
 .dialogue-page.dark-mode .day-cycle-morning {
   background:
-    radial-gradient(ellipse 80% 60% at 25% 35%, rgba(56, 100, 190, 0.038) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 70% at 75% 60%, rgba(30, 58, 138, 0.022) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 25% 35%, rgba(96, 165, 250, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 75% 60%, rgba(60, 130, 246, 0.08) 0%, transparent 50%);
 }
 .dialogue-page.dark-mode .day-cycle-day {
   background:
-    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(8, 145, 178, 0.040) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(6, 182, 212, 0.026) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(34, 211, 238, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
 }
 .dialogue-page.dark-mode .day-cycle-golden {
   background:
-    radial-gradient(ellipse 75% 55% at 35% 45%, rgba(180, 110, 10, 0.038) 0%, transparent 50%),
-    radial-gradient(ellipse 55% 75% at 70% 55%, rgba(146, 76, 6, 0.026) 0%, transparent 55%);
+    radial-gradient(ellipse 75% 55% at 35% 45%, rgba(251, 191, 36, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 75% at 70% 55%, rgba(245, 158, 11, 0.07) 0%, transparent 55%);
 }
 .dialogue-page.dark-mode .day-cycle-dusk {
   background:
-    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(157, 23, 77, 0.038) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 70% at 75% 45%, rgba(88, 28, 135, 0.030) 0%, transparent 55%);
+    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(244, 114, 182, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 70% at 75% 45%, rgba(167, 139, 250, 0.08) 0%, transparent 55%);
 }
 .dialogue-page.dark-mode .day-cycle-night {
   background:
-    radial-gradient(ellipse 85% 65% at 40% 45%, rgba(15, 10, 60, 0.040) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 65% 55%, rgba(30, 20, 100, 0.028) 0%, transparent 55%);
+    radial-gradient(ellipse 85% 65% at 40% 45%, rgba(99, 102, 241, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 65% 55%, rgba(139, 92, 246, 0.08) 0%, transparent 55%);
 }
 
 /* Shared animation timing for all gradient layers */

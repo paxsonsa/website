@@ -361,6 +361,7 @@ export default function DialoguePage() {
 
   // Theme state — default to system preference, persist choice
   const [isDark, setIsDark] = useState(false);
+  const isDarkRef = useRef(false);
   const [themeReady, setThemeReady] = useState(false);
 
   useEffect(() => {
@@ -382,6 +383,9 @@ export default function DialoguePage() {
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
+
+  // Keep ref in sync for use in intervals/rAF loops
+  useEffect(() => { isDarkRef.current = isDark; }, [isDark]);
 
   const toggleTheme = useCallback(() => {
     setIsDark((prev) => {
@@ -493,33 +497,41 @@ export default function DialoguePage() {
       );
     }
 
-    // Accent color cycle
+    // Accent color cycle — separate palettes for legibility
     const CYCLE_DURATION = 1800000;
-    const accentColors = [
-      { pos: 0,    color: [96, 165, 250] },
-      { pos: 0.20, color: [8, 145, 178] },
-      { pos: 0.42, color: [217, 119, 6] },
-      { pos: 0.60, color: [192, 38, 119] },
-      { pos: 0.78, color: [99, 90, 200] },
-      { pos: 1.0,  color: [96, 165, 250] },
+    const lightAccents = [
+      { pos: 0,    color: [59, 130, 246] },   // blue-500
+      { pos: 0.20, color: [8, 145, 178] },    // cyan-600
+      { pos: 0.42, color: [180, 83, 9] },     // amber-700
+      { pos: 0.60, color: [168, 34, 104] },   // pink-700
+      { pos: 0.78, color: [88, 80, 180] },    // indigo-600
+      { pos: 1.0,  color: [59, 130, 246] },   // blue-500
     ];
-
+    const darkAccents = [
+      { pos: 0,    color: [129, 185, 255] },  // blue-300
+      { pos: 0.20, color: [34, 211, 238] },   // cyan-400
+      { pos: 0.42, color: [251, 191, 36] },   // amber-400
+      { pos: 0.60, color: [244, 114, 182] },  // pink-400
+      { pos: 0.78, color: [165, 148, 255] },  // indigo-300
+      { pos: 1.0,  color: [129, 185, 255] },  // blue-300
+    ];
     function lerpColor(a, b, t) {
       return a.map((v, i) => Math.round(v + (b[i] - v) * t));
     }
 
     function getAccent(elapsed) {
+      const palette = isDarkRef.current ? darkAccents : lightAccents;
       const t = (elapsed % CYCLE_DURATION) / CYCLE_DURATION;
-      for (let i = 0; i < accentColors.length - 1; i++) {
-        const curr = accentColors[i];
-        const next = accentColors[i + 1];
+      for (let i = 0; i < palette.length - 1; i++) {
+        const curr = palette[i];
+        const next = palette[i + 1];
         if (t >= curr.pos && t <= next.pos) {
           const local = (t - curr.pos) / (next.pos - curr.pos);
           const rgb = lerpColor(curr.color, next.color, local);
           return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
         }
       }
-      return `rgb(8, 145, 178)`;
+      return isDarkRef.current ? `rgb(34, 211, 238)` : `rgb(8, 145, 178)`;
     }
 
     const randomOffset = Math.random() * CYCLE_DURATION;
@@ -583,14 +595,16 @@ export default function DialoguePage() {
           opacity = (isDark ? 0.4 : 0.35) + progress * (isDark ? 0.6 : 0.65);
           yShift = 6 * bloomDir - progress * 6 * bloomDir;
         }
+        const bloomSettled = visibleSections >= CASCADING_SECTIONS;
         return (
           <div
             ref={driftElRef}
-            className="fixed inset-0 pointer-events-none z-0"
+            className={`fixed inset-0 pointer-events-none z-0${bloomSettled ? " gradient-cloud-pass" : ""}`}
             style={{
               "--drift-x": "0%",
               "--drift-y": "0%",
-              opacity,
+              "--bloom-opacity": opacity,
+              ...(!bloomSettled ? { opacity } : {}),
               transform: `scale(${scale}) translate(var(--drift-x), calc(${yShift}% + var(--drift-y)))`,
               transformOrigin: "50% 30%",
               transition: bloomStarted
