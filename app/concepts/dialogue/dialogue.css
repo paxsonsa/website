@@ -30,10 +30,6 @@
 }
 
 /* --- Typewriter --- */
-@keyframes typing {
-  from { width: 0; }
-  to   { width: 100%; }
-}
 
 @keyframes blinkCaret {
   0%, 100% { border-color: var(--accent, #0891B2); }
@@ -45,17 +41,21 @@
   position: relative;
 }
 
-.typewriter-text {
-  display: inline-block;
-  overflow: hidden;
+/* JS-driven typewriter — no CSS width animation */
+.typewriter-text-js {
+  display: inline;
   white-space: nowrap;
-  border-right: 3px solid var(--accent, #0891B2);
-  width: 0;
-  /* 1800ms typing, 15 steps (char count for "Hi, I'm Andrew.") */
-  animation:
-    typing 1800ms steps(15, end) forwards,
-    blinkCaret 0.7s step-end infinite;
-  animation-delay: 0.15s;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  background-color: var(--accent, #0891B2);
+  animation: blinkCaret 0.7s step-end infinite;
+  transition: opacity 0.5s ease-out;
 }
 
 /* --- Stagger-in after typing completes --- */
@@ -70,22 +70,22 @@
   }
 }
 
-/* Timing: TOTAL_INTRO_DELAY = 2400ms, then offsets */
+/* Timing: TOTAL_INTRO_DELAY = 3600ms (800 settle + 2200 typing + 600 cursor), then offsets */
 .stagger-after-1 {
   opacity: 0;
-  animation: fadeUp 0.8s ease-out 2600ms forwards; /* subtitle */
+  animation: fadeUp 0.8s ease-out 3800ms forwards; /* subtitle */
 }
 .stagger-after-1b {
   opacity: 0;
-  animation: fadeUp 0.8s ease-out 4600ms forwards; /* belief */
+  animation: fadeUp 0.8s ease-out 5800ms forwards; /* belief */
 }
 .stagger-after-2 {
   opacity: 0;
-  animation: fadeUp 0.8s ease-out 6600ms forwards; /* role */
+  animation: fadeUp 0.8s ease-out 7800ms forwards; /* role */
 }
 .stagger-after-3 {
   opacity: 0;
-  animation: fadeUp 0.6s ease-out 7400ms forwards; /* socials */
+  animation: fadeUp 0.6s ease-out 8600ms forwards; /* socials */
 }
 
 /* --- Breathing: subtle scale pulse on main content --- */

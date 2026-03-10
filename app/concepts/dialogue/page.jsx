@@ -281,10 +281,68 @@ function SocialIconSmall({ href, icon: Icon }) {
   );
 }
 
-// --- Constants ---
+// --- Typewriter with natural pauses ---
 
 const GREETING = "Hi, I\u2019m Andrew.";
-const TYPING_DURATION_MS = 1800;
+// Typing segments: [text, pauseAfterMs]
+// ~120ms per char (≈100 WPM), with a beat after "Hi,"
+const TYPING_SEGMENTS = [
+  { text: "Hi,", pauseAfter: 400 },
+  { text: " I\u2019m Andrew.", pauseAfter: 0 },
+];
+const CHAR_MS = 120;
+
+const START_DELAY_MS = 800;
+
+function useTypewriter(segments, startDelay = START_DELAY_MS) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const fullText = segments.map((s) => s.text).join("");
+    let charIndex = 0;
+    let segIndex = 0;
+    let segCharIndex = 0;
+
+    function typeNext() {
+      if (cancelled) return;
+      if (charIndex >= fullText.length) {
+        setDone(true);
+        return;
+      }
+
+      charIndex++;
+      segCharIndex++;
+      setDisplayed(fullText.slice(0, charIndex));
+
+      const seg = segments[segIndex];
+      // End of current segment?
+      if (segCharIndex >= seg.text.length && segIndex < segments.length - 1) {
+        segIndex++;
+        segCharIndex = 0;
+        // Pause between segments
+        setTimeout(typeNext, seg.pauseAfter);
+      } else {
+        // Natural variation: ±30ms jitter
+        const jitter = (Math.random() - 0.5) * 60;
+        setTimeout(typeNext, CHAR_MS + jitter);
+      }
+    }
+
+    const start = setTimeout(() => {
+      setStarted(true);
+      typeNext();
+    }, startDelay);
+    return () => { cancelled = true; clearTimeout(start); };
+  }, []);
+
+  return { displayed, done, started };
+}
+
+// Compute total typing duration for downstream timing
+const TYPING_DURATION_MS = START_DELAY_MS + GREETING.length * CHAR_MS + TYPING_SEGMENTS.reduce((sum, s) => sum + s.pauseAfter, 0);
 const CURSOR_PAUSE_MS = 600;
 const TOTAL_INTRO_DELAY_MS = TYPING_DURATION_MS + CURSOR_PAUSE_MS;
 
@@ -302,6 +360,13 @@ let introHasPlayed = false;
 
 export default function DialoguePage() {
   const { navigateWithFade, setBloomPhase, setBloomProgress } = useDialogue();
+
+  // JS-driven typewriter (only runs on fresh load, skipped on return nav)
+  const skipIntro = introHasPlayed;
+  const { displayed: typedText, done: typingFinished, started: typingStarted } = useTypewriter(
+    skipIntro ? [{ text: GREETING, pauseAfter: 0 }] : TYPING_SEGMENTS,
+    skipIntro ? 0 : START_DELAY_MS,
+  );
 
   // Animation states
   const [typingDone, setTypingDone] = useState(false);
@@ -379,7 +444,17 @@ export default function DialoguePage() {
           style={{ fontFamily: "var(--font-newsreader)" }}
         >
           <span className="typewriter-wrapper">
-            <span className="typewriter-text">{GREETING}</span>
+            <span className="typewriter-text-js">
+              {skipIntro ? GREETING : typedText}
+              {(skipIntro || typingStarted) && (
+                <span
+                  className="typewriter-cursor"
+                  style={{
+                    opacity: typingFinished && typingDone ? 0 : 1,
+                  }}
+                />
+              )}
+            </span>
           </span>
         </h1>
 
