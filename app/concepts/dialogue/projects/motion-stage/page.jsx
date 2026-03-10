@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Newsreader, Overpass_Mono } from "next/font/google";
 import { ArrowLeft } from "iconoir-react";
+import "./motion-stage.css";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -223,37 +224,6 @@ export default function MotionStagePage() {
         transition: "opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
       }}
     >
-      <style jsx global>{`
-        .project-gradient-base {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-size: 200% 200%;
-        }
-        @keyframes driftA {
-          0%, 100% { background-position: 50% 50%; }
-          33% { background-position: 45% 55%; }
-          66% { background-position: 55% 45%; }
-        }
-        @keyframes driftB {
-          0%, 100% { background-position: 50% 50%; }
-          33% { background-position: 55% 45%; }
-          66% { background-position: 45% 55%; }
-        }
-        .project-gradient-a {
-          background:
-            radial-gradient(ellipse 80% 60% at 30% 40%, rgba(8, 145, 178, 0.18) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 80% at 70% 60%, rgba(8, 145, 178, 0.12) 0%, transparent 50%);
-          animation: driftA 45s ease-in-out infinite;
-        }
-        .project-gradient-b {
-          background:
-            radial-gradient(ellipse 75% 55% at 65% 35%, rgba(96, 165, 250, 0.14) 0%, transparent 55%),
-            radial-gradient(ellipse 55% 75% at 35% 65%, rgba(99, 90, 200, 0.10) 0%, transparent 50%);
-          animation: driftB 50s ease-in-out infinite;
-        }
-      `}</style>
-
       {/* Gradient bloom */}
       <div
         ref={driftElRef}

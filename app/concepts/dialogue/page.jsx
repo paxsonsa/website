@@ -4,7 +4,8 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Newsreader, Overpass_Mono } from "next/font/google";
-import { Threads, GithubCircle, Linkedin, Youtube } from "iconoir-react";
+import { Threads, GithubCircle, Linkedin, Youtube, SunLight, HalfMoon } from "iconoir-react";
+import "./dialogue.css";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -89,7 +90,7 @@ function Statement({ text, detail }) {
         className="text-xl sm:text-2xl leading-relaxed transition-colors duration-[375ms]"
         style={{
           fontFamily: "var(--font-newsreader)",
-          color: expanded ? "var(--accent, #0891B2)" : "#18181B",
+          color: expanded ? "var(--accent, #0891B2)" : "var(--d-text)",
         }}
       >
         {text}
@@ -106,7 +107,7 @@ function Statement({ text, detail }) {
           className="text-base leading-relaxed mt-2"
           style={{
             fontFamily: "var(--font-overpass-mono)",
-            color: "#71717A",
+            color: "var(--d-detail)",
             fontSize: "0.85rem",
           }}
         >
@@ -128,7 +129,7 @@ function ProjectLine({ name, description, href, onNavigate }) {
         className="text-3xl sm:text-4xl font-light transition-colors duration-[375ms]"
         style={{
           fontFamily: "var(--font-newsreader)",
-          color: hovered ? "var(--accent, #0891B2)" : "#18181B",
+          color: hovered ? "var(--accent, #0891B2)" : "var(--d-text)",
         }}
       >
         {name}
@@ -145,7 +146,7 @@ function ProjectLine({ name, description, href, onNavigate }) {
           className="text-base leading-relaxed mt-1"
           style={{
             fontFamily: "var(--font-overpass-mono)",
-            color: "#71717A",
+            color: "var(--d-detail)",
             fontSize: "0.85rem",
           }}
         >
@@ -191,8 +192,8 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
       rel="noopener noreferrer"
       className="group flex items-center gap-5 px-5 py-4 rounded-lg border transition-all duration-[375ms]"
       style={{
-        borderColor: hovered ? "var(--accent, #0891B2)" : "#E4E4E7",
-        backgroundColor: hovered ? "rgba(0,0,0,0.015)" : "transparent",
+        borderColor: hovered ? "var(--accent, #0891B2)" : "var(--d-border)",
+        backgroundColor: hovered ? "var(--d-hover-bg)" : "transparent",
       }}
       onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); }}
       onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
@@ -203,14 +204,14 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
         width={28}
         height={28}
         strokeWidth={1.4}
-        style={{ color: hovered ? "var(--accent, #0891B2)" : "#71717A" }}
+        style={{ color: hovered ? "var(--accent, #0891B2)" : "var(--d-social-icon)" }}
       />
       <div className="flex-1 min-w-0">
         <span
           className="block text-lg font-normal transition-colors duration-[375ms]"
           style={{
             fontFamily: "var(--font-newsreader)",
-            color: hovered ? "var(--accent, #0891B2)" : "#18181B",
+            color: hovered ? "var(--accent, #0891B2)" : "var(--d-text)",
           }}
         >
           {label}
@@ -219,7 +220,7 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
           className="block text-xs mt-0.5"
           style={{
             fontFamily: "var(--font-overpass-mono)",
-            color: "#A1A1AA",
+            color: "var(--d-muted)",
           }}
         >
           {subtitle}
@@ -228,7 +229,7 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
       <span
         className="text-lg transition-all duration-[375ms]"
         style={{
-          color: hovered ? "var(--accent, #0891B2)" : "#A1A1AA",
+          color: hovered ? "var(--accent, #0891B2)" : "var(--d-muted)",
           transform: hovered ? "translateX(4px)" : "translateX(0)",
         }}
       >
@@ -250,9 +251,9 @@ function SocialLinkSmall({ href, icon: Icon, label }) {
       rel="noopener noreferrer"
       className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-md border transition-all duration-[375ms]"
       style={{
-        borderColor: hovered ? "var(--accent, #0891B2)" : "#E4E4E7",
-        backgroundColor: hovered ? "rgba(0,0,0,0.015)" : "transparent",
-        color: "#18181B",
+        borderColor: hovered ? "var(--accent, #0891B2)" : "var(--d-border)",
+        backgroundColor: hovered ? "var(--d-hover-bg)" : "transparent",
+        color: "var(--d-text)",
       }}
       onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); }}
       onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
@@ -262,13 +263,13 @@ function SocialLinkSmall({ href, icon: Icon, label }) {
         width={18}
         height={18}
         strokeWidth={1.5}
-        style={{ color: hovered ? "var(--accent, #0891B2)" : "#71717A" }}
+        style={{ color: hovered ? "var(--accent, #0891B2)" : "var(--d-social-icon)" }}
       />
       <span
         className="text-sm font-normal transition-colors duration-[375ms]"
         style={{
           fontFamily: "var(--font-overpass-mono)",
-          color: hovered ? "var(--accent, #0891B2)" : undefined,
+          color: hovered ? "var(--accent, #0891B2)" : "var(--d-social-label)",
         }}
       >
         {label}
@@ -288,12 +289,43 @@ function SocialIconSmall({ href, icon: Icon }) {
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center justify-center transition-colors duration-[375ms]"
-      style={{ color: hovered ? "var(--accent, #0891B2)" : "#A1A1AA" }}
+      style={{ color: hovered ? "var(--accent, #0891B2)" : "var(--d-muted)" }}
       onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); }}
       onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
     >
       <Icon width={20} height={20} strokeWidth={1.5} />
     </a>
+  );
+}
+
+// --- Theme toggle button ---
+
+function ThemeToggle({ isDark, onToggle }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <button
+      onClick={onToggle}
+      className="fixed top-6 right-6 z-50 p-2.5 rounded-full border transition-all duration-500 cursor-pointer"
+      style={{
+        borderColor: hovered ? "var(--accent, #0891B2)" : "var(--d-border)",
+        backgroundColor: hovered ? "var(--d-hover-bg)" : "var(--d-bg)",
+        color: hovered ? "var(--accent, #0891B2)" : "var(--d-muted)",
+        backdropFilter: "blur(12px)",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      <div
+        style={{
+          transition: "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease",
+          transform: isDark ? "rotate(0deg)" : "rotate(-90deg)",
+        }}
+      >
+        {isDark ? <SunLight width={18} height={18} strokeWidth={1.5} /> : <HalfMoon width={18} height={18} strokeWidth={1.5} />}
+      </div>
+    </button>
   );
 }
 
@@ -313,24 +345,57 @@ const SOCIAL_ICON_STAGGER_MS = 120; // stagger between each social icon
 const HEADER_COMPLETE_MS = TOTAL_INTRO_DELAY_MS + 6200; // ~8.6s — page cascades shortly after socials land
 const SECTION_STAGGER_MS = 350; // gentle stagger between sections
 
+const THEME_KEY = "dialogue-theme";
+
 // ==========================================================================
 // Page
 // ==========================================================================
 
 const CASCADING_SECTIONS = 6; // narrative, what-i-do, work, writing, connect, footer
 
-const ANIM_SEEN_KEY = "dialogue-intro-seen";
+// Module-level flag — survives client-side navigations but resets on full page refresh
+let introHasPlayed = false;
 
 export default function DialoguePage() {
   const router = useRouter();
 
-  // Skip intro animation if already seen this session (e.g. back from project page)
-  const skipIntro = typeof window !== "undefined" && sessionStorage.getItem(ANIM_SEEN_KEY) === "1";
+  // Theme state — default to system preference, persist choice
+  const [isDark, setIsDark] = useState(false);
+  const [themeReady, setThemeReady] = useState(false);
 
-  const [typingDone, setTypingDone] = useState(skipIntro);
-  const [bloomStarted, setBloomStarted] = useState(skipIntro);
-  const [headerComplete, setHeaderComplete] = useState(skipIntro);
-  const [visibleSections, setVisibleSections] = useState(skipIntro ? CASCADING_SECTIONS : 0);
+  useEffect(() => {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved !== null) {
+      setIsDark(saved === "dark");
+    } else {
+      setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+    setThemeReady(true);
+
+    // Listen for system preference changes (only when no saved preference)
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e) => {
+      if (!localStorage.getItem(THEME_KEY)) {
+        setIsDark(e.matches);
+      }
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setIsDark((prev) => {
+      const next = !prev;
+      localStorage.setItem(THEME_KEY, next ? "dark" : "light");
+      return next;
+    });
+  }, []);
+
+  // Animation states — always start "not played" for SSR hydration consistency
+  const [typingDone, setTypingDone] = useState(false);
+  const [bloomStarted, setBloomStarted] = useState(false);
+  const [headerComplete, setHeaderComplete] = useState(false);
+  const [visibleSections, setVisibleSections] = useState(0);
   const [pageExiting, setPageExiting] = useState(false);
 
   // Fade out page, then navigate
@@ -340,20 +405,18 @@ export default function DialoguePage() {
   }, [router]);
 
   // Gradient drift — follows mouse (desktop) or scroll (mobile)
-  // "Cold honey" — heavy lerp, tiny max offset
-  const driftRef = useRef({ x: 0, y: 0 }); // current interpolated position
-  const driftTargetRef = useRef({ x: 0, y: 0 }); // where we want to be
-  const driftElRef = useRef(null); // the bloom wrapper element
+  const driftRef = useRef({ x: 0, y: 0 });
+  const driftTargetRef = useRef({ x: 0, y: 0 });
+  const driftElRef = useRef(null);
   const rafRef = useRef(null);
 
   useEffect(() => {
-    const MAX_DRIFT = 1.5; // max % translate — very subtle
-    const LERP_FACTOR = 0.015; // ~1.5% per frame — cold honey speed
+    const MAX_DRIFT = 1.5;
+    const LERP_FACTOR = 0.015;
     const isTouch = !window.matchMedia("(hover: hover)").matches;
     let lastScrollY = window.scrollY;
 
     function onMouseMove(e) {
-      // Map mouse position to -1..1 range, then scale to max drift
       const nx = (e.clientX / window.innerWidth - 0.5) * 2;
       const ny = (e.clientY / window.innerHeight - 0.5) * 2;
       driftTargetRef.current = { x: nx * MAX_DRIFT, y: ny * MAX_DRIFT };
@@ -363,7 +426,6 @@ export default function DialoguePage() {
       const scrollY = window.scrollY;
       const delta = scrollY - lastScrollY;
       lastScrollY = scrollY;
-      // Scroll delta mapped to a small vertical nudge, clamped
       const nudge = Math.max(-MAX_DRIFT, Math.min(MAX_DRIFT, delta * 0.02));
       driftTargetRef.current = { x: driftTargetRef.current.x, y: nudge };
     }
@@ -377,7 +439,6 @@ export default function DialoguePage() {
         driftElRef.current.style.setProperty("--drift-x", `${d.x}%`);
         driftElRef.current.style.setProperty("--drift-y", `${d.y}%`);
       }
-      // On mobile, ease target back to 0 (elastic return)
       if (isTouch) {
         t.x *= 0.98;
         t.y *= 0.98;
@@ -402,7 +463,16 @@ export default function DialoguePage() {
   useEffect(() => {
     const timers = [];
 
-    if (!skipIntro) {
+    if (introHasPlayed) {
+      // Returning via client-side nav — reveal immediately
+      requestAnimationFrame(() => {
+        setTypingDone(true);
+        setBloomStarted(true);
+        setHeaderComplete(true);
+        setVisibleSections(CASCADING_SECTIONS);
+      });
+    } else {
+      // Fresh page load — run the full intro sequence
       timers.push(setTimeout(() => setTypingDone(true), TOTAL_INTRO_DELAY_MS));
 
       const BLOOM_LEAD_MS = 400;
@@ -415,23 +485,23 @@ export default function DialoguePage() {
         );
       }
 
-      // Mark animation as seen once cascade finishes
+      // Mark intro as played — survives SPA navigation, resets on refresh
       timers.push(
         setTimeout(() => {
-          sessionStorage.setItem(ANIM_SEEN_KEY, "1");
+          introHasPlayed = true;
         }, HEADER_COMPLETE_MS + CASCADING_SECTIONS * SECTION_STAGGER_MS + 500)
       );
     }
 
-    // Accent color cycle — synced to the 1800s (30 min) gradient cycle
-    const CYCLE_DURATION = 1800000; // 30 minutes in ms
+    // Accent color cycle
+    const CYCLE_DURATION = 1800000;
     const accentColors = [
-      { pos: 0,    color: [96, 165, 250] },  // morning — soft blue
-      { pos: 0.20, color: [8, 145, 178] },   // day — cyan
-      { pos: 0.42, color: [217, 119, 6] },   // golden — amber
-      { pos: 0.60, color: [192, 38, 119] },  // dusk — rose
-      { pos: 0.78, color: [99, 90, 200] },   // night — indigo
-      { pos: 1.0,  color: [96, 165, 250] },  // back to morning
+      { pos: 0,    color: [96, 165, 250] },
+      { pos: 0.20, color: [8, 145, 178] },
+      { pos: 0.42, color: [217, 119, 6] },
+      { pos: 0.60, color: [192, 38, 119] },
+      { pos: 0.78, color: [99, 90, 200] },
+      { pos: 1.0,  color: [96, 165, 250] },
     ];
 
     function lerpColor(a, b, t) {
@@ -452,20 +522,17 @@ export default function DialoguePage() {
       return `rgb(8, 145, 178)`;
     }
 
-    // Pick a random starting position in the cycle so each visit feels different
     const randomOffset = Math.random() * CYCLE_DURATION;
     const startTime = Date.now();
 
-    // Set the CSS animation offset to match (negative delay = start partway through)
     const offsetSec = Math.round(randomOffset / 1000);
     document.documentElement.style.setProperty("--cycle-offset", `-${offsetSec}s`);
 
     const accentInterval = setInterval(() => {
       const accent = getAccent((Date.now() - startTime) + randomOffset);
       document.documentElement.style.setProperty("--accent", accent);
-    }, 1000); // update every 1s — plenty smooth for 30min cycle
+    }, 1000);
 
-    // Set initial accent at random position
     const initialAccent = getAccent(randomOffset);
     document.documentElement.style.setProperty("--accent", initialAccent);
 
@@ -476,268 +543,45 @@ export default function DialoguePage() {
     };
   }, []);
 
-  // Character count for CSS steps()
-  const charCount = GREETING.length;
-
-  // Cascade style: section N becomes visible when visibleSections >= N
   const cascadeStyle = (visible, index) => ({
     opacity: visible >= index ? 1 : 0,
     transform: visible >= index ? "translateY(0)" : "translateY(8px)",
     transition: "opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
   });
 
+  // Bloom direction: day drifts down, night rises up
+  const bloomDir = isDark ? -1 : 1;
+
   return (
     <div
-      className={`${newsreader.variable} ${overpassMono.variable} min-h-screen dialogue-page`}
+      className={`${newsreader.variable} ${overpassMono.variable} min-h-screen dialogue-page${isDark ? " dark-mode" : ""}`}
       style={{
-        backgroundColor: "#FAFAF7",
-        color: "#18181B",
-        opacity: pageExiting ? 0 : 1,
+        backgroundColor: "var(--d-bg)",
+        color: "var(--d-text)",
+        opacity: pageExiting ? 0 : themeReady ? 1 : 0,
         transform: pageExiting ? "translateY(-4px)" : "translateY(0)",
-        transition: "opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
+        transition: "background-color 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
       }}
     >
-      {/* ---- keyframes & animations ---- */}
-      <style jsx global>{`
-        /* --- Typewriter --- */
-        @keyframes typing {
-          from { width: 0; }
-          to   { width: 100%; }
-        }
+      {/* Theme toggle */}
+      <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
-        @keyframes blinkCaret {
-          0%, 100% { border-color: var(--accent, #0891B2); }
-          50%      { border-color: transparent; }
-        }
-
-        .typewriter-wrapper {
-          display: inline-block;
-          position: relative;
-        }
-
-        .typewriter-text {
-          display: inline-block;
-          overflow: hidden;
-          white-space: nowrap;
-          border-right: 3px solid var(--accent, #0891B2);
-          width: 0;
-          animation:
-            typing ${TYPING_DURATION_MS}ms steps(${charCount}, end) forwards,
-            blinkCaret 0.7s step-end infinite;
-          animation-delay: 0.15s;
-        }
-
-        /* --- Stagger-in after typing completes --- */
-        @keyframes fadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .stagger-after-1 {
-          opacity: 0;
-          animation: fadeUp 0.8s ease-out ${SUBTITLE_DELAY_MS}ms forwards;
-        }
-        .stagger-after-1b {
-          opacity: 0;
-          animation: fadeUp 0.8s ease-out ${BELIEF_DELAY_MS}ms forwards;
-        }
-        .stagger-after-2 {
-          opacity: 0;
-          animation: fadeUp 0.8s ease-out ${ROLE_DELAY_MS}ms forwards;
-        }
-        .stagger-after-3 {
-          opacity: 0;
-          animation: fadeUp 0.6s ease-out ${SOCIALS_DELAY_MS}ms forwards;
-        }
-
-        /* --- Breathing: subtle scale pulse on main content --- */
-        @keyframes breathe {
-          0%, 100% { transform: scale(1.0); }
-          50%      { transform: scale(1.003); }
-        }
-
-        .breathing {
-          animation: breathe 8s ease-in-out infinite;
-        }
-
-        /* --- Teal accent pulse --- */
-        @keyframes tealPulse {
-          0%, 100% { opacity: 1; }
-          50%      { opacity: 0.85; }
-        }
-
-        .teal-pulse {
-          animation: tealPulse 4s ease-in-out infinite;
-        }
-
-        /* --- Social icon pile-in --- */
-        @keyframes pileIn {
-          0% {
-            opacity: 0;
-            transform: translateY(8px) scale(0.8);
-          }
-          60% {
-            opacity: 1;
-            transform: translateY(-2px) scale(1.05);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        .social-pile-in {
-          opacity: 0;
-          display: inline-flex;
-          animation: pileIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        /* --- Day cycle background --- */
-        /* 5 phases: morning → day → golden hour → dusk → night, ~4 min full cycle */
-
-        .dialogue-page {
-          position: relative;
-        }
-
-        /* Slow drift for each gradient layer */
-        @keyframes driftA {
-          0%   { background-position: 20% 30%; }
-          50%  { background-position: 80% 70%; }
-          100% { background-position: 20% 30%; }
-        }
-
-        @keyframes driftB {
-          0%   { background-position: 70% 60%; }
-          50%  { background-position: 30% 40%; }
-          100% { background-position: 70% 60%; }
-        }
-
-        /* Cross-fade keyframes — each layer is visible for ~20% of the cycle
-           with long overlapping fades. Total cycle: 1800s (30 minutes). */
-
-        /* Phase 1: Morning — soft cool blue, hint of warmth */
-        @keyframes cycleMorning {
-          0%   { opacity: 1; }
-          15%  { opacity: 1; }
-          25%  { opacity: 0; }
-          85%  { opacity: 0; }
-          95%  { opacity: 1; }
-          100% { opacity: 1; }
-        }
-
-        /* Phase 2: Day — clear cyan, bright and present */
-        @keyframes cycleDay {
-          0%   { opacity: 0; }
-          10%  { opacity: 0; }
-          22%  { opacity: 1; }
-          38%  { opacity: 1; }
-          48%  { opacity: 0; }
-          100% { opacity: 0; }
-        }
-
-        /* Phase 3: Golden hour — warm amber wash */
-        @keyframes cycleGolden {
-          0%   { opacity: 0; }
-          33%  { opacity: 0; }
-          43%  { opacity: 1; }
-          55%  { opacity: 1; }
-          65%  { opacity: 0; }
-          100% { opacity: 0; }
-        }
-
-        /* Phase 4: Dusk — deep rose and purple */
-        @keyframes cycleDusk {
-          0%   { opacity: 0; }
-          50%  { opacity: 0; }
-          60%  { opacity: 1; }
-          72%  { opacity: 1; }
-          82%  { opacity: 0; }
-          100% { opacity: 0; }
-        }
-
-        /* Phase 5: Night — deep indigo, barely there */
-        @keyframes cycleNight {
-          0%   { opacity: 0; }
-          68%  { opacity: 0; }
-          78%  { opacity: 1; }
-          90%  { opacity: 1; }
-          100% { opacity: 0; }
-        }
-
-        .day-cycle-base {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-size: 200% 200%;
-        }
-
-        .day-cycle-morning {
-          background:
-            radial-gradient(ellipse 80% 60% at 25% 35%, rgba(96, 165, 250, 0.19) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 70% at 75% 60%, rgba(251, 191, 36, 0.10) 0%, transparent 50%);
-          animation: cycleMorning 1800s ease-in-out infinite, driftA 45s ease-in-out infinite;
-          animation-delay: var(--cycle-offset, 0s), 0s;
-        }
-
-        .day-cycle-day {
-          background:
-            radial-gradient(ellipse 80% 60% at 30% 40%, rgba(8, 145, 178, 0.18) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 80% at 70% 60%, rgba(8, 145, 178, 0.12) 0%, transparent 50%);
-          animation: cycleDay 1800s ease-in-out infinite, driftB 40s ease-in-out infinite;
-          animation-delay: var(--cycle-offset, 0s), 0s;
-        }
-
-        .day-cycle-golden {
-          background:
-            radial-gradient(ellipse 75% 55% at 35% 45%, rgba(245, 158, 11, 0.19) 0%, transparent 50%),
-            radial-gradient(ellipse 55% 75% at 70% 55%, rgba(217, 119, 6, 0.12) 0%, transparent 55%);
-          animation: cycleGolden 1800s ease-in-out infinite, driftA 50s ease-in-out infinite;
-          animation-delay: var(--cycle-offset, 0s), 0s;
-        }
-
-        .day-cycle-dusk {
-          background:
-            radial-gradient(ellipse 70% 60% at 30% 50%, rgba(219, 39, 119, 0.16) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 70% at 75% 45%, rgba(124, 58, 237, 0.12) 0%, transparent 55%);
-          animation: cycleDusk 1800s ease-in-out infinite, driftB 48s ease-in-out infinite;
-          animation-delay: var(--cycle-offset, 0s), 0s;
-        }
-
-        .day-cycle-night {
-          background:
-            radial-gradient(ellipse 85% 65% at 40% 45%, rgba(30, 27, 75, 0.19) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 80% at 65% 55%, rgba(55, 48, 163, 0.12) 0%, transparent 55%);
-          animation: cycleNight 1800s ease-in-out infinite, driftA 42s ease-in-out infinite;
-          animation-delay: var(--cycle-offset, 0s), 0s;
-        }
-      `}</style>
-
-      {/* Day cycle gradient layers — bloom initiates the cascade reveal */}
+      {/* Gradient bloom */}
       {(() => {
-        const progress = visibleSections / CASCADING_SECTIONS; // 0 → 1
-        // Three phases: dormant → bloom opens (bloomStarted) → sections fill in (progress)
+        const progress = visibleSections / CASCADING_SECTIONS;
         let scale, opacity, yShift;
         if (!bloomStarted) {
-          // Dormant: tiny, hidden, positioned above
           scale = 0.5;
-          opacity = 0.04;
-          yShift = 15; // starts above, will animate down
+          opacity = isDark ? 0.08 : 0.04;
+          yShift = 15 * bloomDir;
         } else if (visibleSections === 0) {
-          // Bloom phase: gradient sweeps down before content appears
           scale = 0.85;
-          opacity = 0.35;
-          yShift = 6;
+          opacity = isDark ? 0.4 : 0.35;
+          yShift = 6 * bloomDir;
         } else {
-          // Cascade phase: continues settling down as sections fade in
-          scale = 0.85 + progress * 0.35; // → 1.2
-          opacity = 0.35 + progress * 0.65; // → 1.0
-          yShift = 6 - progress * 6; // → 0
+          scale = 0.85 + progress * 0.35;
+          opacity = (isDark ? 0.4 : 0.35) + progress * (isDark ? 0.6 : 0.65);
+          yShift = 6 * bloomDir - progress * 6 * bloomDir;
         }
         return (
           <div
@@ -747,7 +591,7 @@ export default function DialoguePage() {
               "--drift-x": "0%",
               "--drift-y": "0%",
               opacity,
-              transform: `scale(${scale}) translate(calc(${yShift === 0 ? "0%" : "0%"} + var(--drift-x)), calc(${yShift}% + var(--drift-y)))`,
+              transform: `scale(${scale}) translate(var(--drift-x), calc(${yShift}% + var(--drift-y)))`,
               transformOrigin: "50% 30%",
               transition: bloomStarted
                 ? "opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)"
@@ -784,7 +628,7 @@ export default function DialoguePage() {
             className="stagger-after-1 mt-4 text-xl sm:text-2xl leading-relaxed font-light"
             style={{
               fontFamily: "var(--font-newsreader)",
-              color: "#3F3F46",
+              color: "var(--d-subtext)",
             }}
           >
             I&rsquo;m a product designer and engineer who builds tools for
@@ -792,7 +636,7 @@ export default function DialoguePage() {
           </p>
 
           <p
-            className="stagger-after-1b mt-3 text-lg sm:text-xl leading-relaxed font-light italic"
+            className="stagger-after-1b mt-3 text-lg sm:text-xl leading-relaxed font-light"
             style={{
               fontFamily: "var(--font-newsreader)",
               color: "var(--accent, #0891B2)",
@@ -805,7 +649,7 @@ export default function DialoguePage() {
             className="stagger-after-2 mt-6 text-base"
             style={{
               fontFamily: "var(--font-overpass-mono)",
-              color: "#A1A1AA",
+              color: "var(--d-muted)",
               letterSpacing: "0.02em",
             }}
           >
@@ -844,7 +688,7 @@ export default function DialoguePage() {
                 className="text-xl sm:text-2xl leading-relaxed font-light"
                 style={{
                   fontFamily: "var(--font-newsreader)",
-                  color: "#3F3F46",
+                  color: "var(--d-subtext)",
                 }}
               >
                 For the past decade, I&rsquo;ve worked at the intersection of
@@ -858,11 +702,11 @@ export default function DialoguePage() {
                 className="text-xl sm:text-2xl leading-relaxed font-light"
                 style={{
                   fontFamily: "var(--font-newsreader)",
-                  color: "#3F3F46",
+                  color: "var(--d-subtext)",
                 }}
               >
                 Currently at{" "}
-                <span style={{ color: "#18181B", fontWeight: 400 }}>
+                <span style={{ color: "var(--d-text)", fontWeight: 400 }}>
                   Industrial Light &amp; Magic
                 </span>
                 , where I build the internal tools that help artists create
@@ -881,7 +725,7 @@ export default function DialoguePage() {
                 className="text-sm uppercase tracking-widest mb-6"
                 style={{
                   fontFamily: "var(--font-overpass-mono)",
-                  color: "#A1A1AA",
+                  color: "var(--d-muted)",
                 }}
               >
                 What I do
@@ -917,7 +761,7 @@ export default function DialoguePage() {
                 className="text-sm uppercase tracking-widest mb-6"
                 style={{
                   fontFamily: "var(--font-overpass-mono)",
-                  color: "#A1A1AA",
+                  color: "var(--d-muted)",
                 }}
               >
                 Selected work
@@ -955,12 +799,12 @@ export default function DialoguePage() {
                 className="text-xl sm:text-2xl leading-relaxed font-light"
                 style={{
                   fontFamily: "var(--font-newsreader)",
-                  color: "#3F3F46",
+                  color: "var(--d-subtext)",
                 }}
               >
                 I write about the intersection of art, engineering, and product
                 thinking in a blog called{" "}
-                <span style={{ color: "#18181B", fontWeight: 400 }}>
+                <span style={{ color: "var(--d-text)", fontWeight: 400 }}>
                   Mosaic and Monoliths
                 </span>
                 &mdash;mosaics of art and product systems, monoliths as
@@ -995,7 +839,7 @@ export default function DialoguePage() {
                 className="text-xl sm:text-2xl leading-relaxed font-light mb-8"
                 style={{
                   fontFamily: "var(--font-newsreader)",
-                  color: "#3F3F46",
+                  color: "var(--d-subtext)",
                 }}
               >
                 The best way to find me:
@@ -1038,12 +882,12 @@ export default function DialoguePage() {
           {/* ================================================================
               7. Footer
           ================================================================ */}
-          <footer className="border-t pt-8 pb-16 cascade-section" style={{ borderColor: "#E4E4E7", ...cascadeStyle(visibleSections, 6) }}>
+          <footer className="border-t pt-8 pb-16 cascade-section" style={{ borderColor: "var(--d-border)", ...cascadeStyle(visibleSections, 6) }}>
             <p
               className="text-xs"
               style={{
                 fontFamily: "var(--font-overpass-mono)",
-                color: "#A1A1AA",
+                color: "var(--d-muted)",
               }}
             >
               &copy; 2025 Andrew Paxson
