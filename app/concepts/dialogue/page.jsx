@@ -85,7 +85,7 @@ function Statement({ text, detail }) {
       }}
     >
       <p
-        className="text-xl sm:text-2xl leading-relaxed transition-colors duration-300"
+        className="text-xl sm:text-2xl leading-relaxed transition-colors duration-[375ms]"
         style={{
           fontFamily: "var(--font-newsreader)",
           color: expanded ? "var(--accent, #0891B2)" : "#18181B",
@@ -118,22 +118,13 @@ function Statement({ text, detail }) {
 
 // --- Project line (tap-friendly for touch devices) ---
 
-function ProjectLine({ name, description }) {
+function ProjectLine({ name, description, href }) {
   const [hovered, setHovered] = useState(false);
 
-  return (
-    <div
-      className="py-4 cursor-pointer"
-      onClick={() => setHovered((v) => !v)}
-      onMouseEnter={() => {
-        if (window.matchMedia("(hover: hover)").matches) setHovered(true);
-      }}
-      onMouseLeave={() => {
-        if (window.matchMedia("(hover: hover)").matches) setHovered(false);
-      }}
-    >
+  const inner = (
+    <>
       <span
-        className="text-3xl sm:text-4xl font-light transition-colors duration-300"
+        className="text-3xl sm:text-4xl font-light transition-colors duration-[375ms]"
         style={{
           fontFamily: "var(--font-newsreader)",
           color: hovered ? "var(--accent, #0891B2)" : "#18181B",
@@ -160,6 +151,25 @@ function ProjectLine({ name, description }) {
           {description}
         </p>
       </div>
+    </>
+  );
+
+  const handlers = {
+    onMouseEnter: () => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); },
+    onMouseLeave: () => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); },
+  };
+
+  if (href) {
+    return (
+      <Link href={href} className="block py-4" {...handlers}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="py-4 cursor-pointer" onClick={() => setHovered((v) => !v)} {...handlers}>
+      {inner}
     </div>
   );
 }
@@ -174,7 +184,7 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-5 px-5 py-4 rounded-lg border transition-all duration-300"
+      className="group flex items-center gap-5 px-5 py-4 rounded-lg border transition-all duration-[375ms]"
       style={{
         borderColor: hovered ? "var(--accent, #0891B2)" : "#E4E4E7",
         backgroundColor: hovered ? "rgba(0,0,0,0.015)" : "transparent",
@@ -184,7 +194,7 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
       onClick={() => setHovered((v) => !v)}
     >
       <Icon
-        className="flex-shrink-0 transition-colors duration-300"
+        className="flex-shrink-0 transition-colors duration-[375ms]"
         width={28}
         height={28}
         strokeWidth={1.4}
@@ -192,7 +202,7 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
       />
       <div className="flex-1 min-w-0">
         <span
-          className="block text-lg font-normal transition-colors duration-300"
+          className="block text-lg font-normal transition-colors duration-[375ms]"
           style={{
             fontFamily: "var(--font-newsreader)",
             color: hovered ? "var(--accent, #0891B2)" : "#18181B",
@@ -211,7 +221,7 @@ function SocialCard({ href, icon: Icon, label, subtitle }) {
         </span>
       </div>
       <span
-        className="text-lg transition-all duration-300"
+        className="text-lg transition-all duration-[375ms]"
         style={{
           color: hovered ? "var(--accent, #0891B2)" : "#A1A1AA",
           transform: hovered ? "translateX(4px)" : "translateX(0)",
@@ -233,7 +243,7 @@ function SocialLinkSmall({ href, icon: Icon, label }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-md border transition-all duration-300"
+      className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-md border transition-all duration-[375ms]"
       style={{
         borderColor: hovered ? "var(--accent, #0891B2)" : "#E4E4E7",
         backgroundColor: hovered ? "rgba(0,0,0,0.015)" : "transparent",
@@ -243,14 +253,14 @@ function SocialLinkSmall({ href, icon: Icon, label }) {
       onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
     >
       <Icon
-        className="flex-shrink-0 transition-colors duration-300"
+        className="flex-shrink-0 transition-colors duration-[375ms]"
         width={18}
         height={18}
         strokeWidth={1.5}
         style={{ color: hovered ? "var(--accent, #0891B2)" : "#71717A" }}
       />
       <span
-        className="text-sm font-normal transition-colors duration-300"
+        className="text-sm font-normal transition-colors duration-[375ms]"
         style={{
           fontFamily: "var(--font-overpass-mono)",
           color: hovered ? "var(--accent, #0891B2)" : undefined,
@@ -272,7 +282,7 @@ function SocialIconSmall({ href, icon: Icon }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center justify-center transition-colors duration-300"
+      className="inline-flex items-center justify-center transition-colors duration-[375ms]"
       style={{ color: hovered ? "var(--accent, #0891B2)" : "#A1A1AA" }}
       onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); }}
       onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
@@ -306,19 +316,87 @@ const CASCADING_SECTIONS = 6; // narrative, what-i-do, work, writing, connect, f
 
 export default function DialoguePage() {
   const [typingDone, setTypingDone] = useState(false);
+  const [bloomStarted, setBloomStarted] = useState(false);
   const [headerComplete, setHeaderComplete] = useState(false);
   const [visibleSections, setVisibleSections] = useState(0);
+
+  // Gradient drift — follows mouse (desktop) or scroll (mobile)
+  // "Cold honey" — heavy lerp, tiny max offset
+  const driftRef = useRef({ x: 0, y: 0 }); // current interpolated position
+  const driftTargetRef = useRef({ x: 0, y: 0 }); // where we want to be
+  const driftElRef = useRef(null); // the bloom wrapper element
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const MAX_DRIFT = 1.5; // max % translate — very subtle
+    const LERP_FACTOR = 0.015; // ~1.5% per frame — cold honey speed
+    const isTouch = !window.matchMedia("(hover: hover)").matches;
+    let lastScrollY = window.scrollY;
+
+    function onMouseMove(e) {
+      // Map mouse position to -1..1 range, then scale to max drift
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+      driftTargetRef.current = { x: nx * MAX_DRIFT, y: ny * MAX_DRIFT };
+    }
+
+    function onScroll() {
+      const scrollY = window.scrollY;
+      const delta = scrollY - lastScrollY;
+      lastScrollY = scrollY;
+      // Scroll delta mapped to a small vertical nudge, clamped
+      const nudge = Math.max(-MAX_DRIFT, Math.min(MAX_DRIFT, delta * 0.02));
+      driftTargetRef.current = { x: driftTargetRef.current.x, y: nudge };
+    }
+
+    function tick() {
+      const d = driftRef.current;
+      const t = driftTargetRef.current;
+      d.x += (t.x - d.x) * LERP_FACTOR;
+      d.y += (t.y - d.y) * LERP_FACTOR;
+      if (driftElRef.current) {
+        driftElRef.current.style.setProperty("--drift-x", `${d.x}%`);
+        driftElRef.current.style.setProperty("--drift-y", `${d.y}%`);
+      }
+      // On mobile, ease target back to 0 (elastic return)
+      if (isTouch) {
+        t.x *= 0.98;
+        t.y *= 0.98;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    }
+
+    if (isTouch) {
+      window.addEventListener("scroll", onScroll, { passive: true });
+    } else {
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
+    }
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const typingTimer = setTimeout(() => {
       setTypingDone(true);
     }, TOTAL_INTRO_DELAY_MS);
 
+    // Bloom starts first — gradient opens up as the "reveal"
+    const BLOOM_LEAD_MS = 400; // bloom starts just a beat before content fades in
+    const bloomTimer = setTimeout(() => {
+      setBloomStarted(true);
+    }, HEADER_COMPLETE_MS - BLOOM_LEAD_MS);
+
     const headerTimer = setTimeout(() => {
       setHeaderComplete(true);
     }, HEADER_COMPLETE_MS);
 
     // Cascade sections in one by one after header completes
+    // (bloom is already expanding by now, so sections fade in "under" it)
     const sectionTimers = [];
     for (let i = 0; i < CASCADING_SECTIONS; i++) {
       sectionTimers.push(
@@ -376,6 +454,7 @@ export default function DialoguePage() {
 
     return () => {
       clearTimeout(typingTimer);
+      clearTimeout(bloomTimer);
       clearTimeout(headerTimer);
       sectionTimers.forEach(clearTimeout);
       clearInterval(accentInterval);
@@ -580,59 +659,79 @@ export default function DialoguePage() {
 
         .day-cycle-morning {
           background:
-            radial-gradient(ellipse 80% 60% at 25% 35%, rgba(96, 165, 250, 0.08) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 70% at 75% 60%, rgba(251, 191, 36, 0.04) 0%, transparent 50%);
+            radial-gradient(ellipse 80% 60% at 25% 35%, rgba(96, 165, 250, 0.19) 0%, transparent 55%),
+            radial-gradient(ellipse 50% 70% at 75% 60%, rgba(251, 191, 36, 0.10) 0%, transparent 50%);
           animation: cycleMorning 1800s ease-in-out infinite, driftA 45s ease-in-out infinite;
           animation-delay: var(--cycle-offset, 0s), 0s;
         }
 
         .day-cycle-day {
           background:
-            radial-gradient(ellipse 80% 60% at 30% 40%, rgba(8, 145, 178, 0.07) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 80% at 70% 60%, rgba(8, 145, 178, 0.05) 0%, transparent 50%);
+            radial-gradient(ellipse 80% 60% at 30% 40%, rgba(8, 145, 178, 0.18) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 80% at 70% 60%, rgba(8, 145, 178, 0.12) 0%, transparent 50%);
           animation: cycleDay 1800s ease-in-out infinite, driftB 40s ease-in-out infinite;
           animation-delay: var(--cycle-offset, 0s), 0s;
         }
 
         .day-cycle-golden {
           background:
-            radial-gradient(ellipse 75% 55% at 35% 45%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-            radial-gradient(ellipse 55% 75% at 70% 55%, rgba(217, 119, 6, 0.05) 0%, transparent 55%);
+            radial-gradient(ellipse 75% 55% at 35% 45%, rgba(245, 158, 11, 0.19) 0%, transparent 50%),
+            radial-gradient(ellipse 55% 75% at 70% 55%, rgba(217, 119, 6, 0.12) 0%, transparent 55%);
           animation: cycleGolden 1800s ease-in-out infinite, driftA 50s ease-in-out infinite;
           animation-delay: var(--cycle-offset, 0s), 0s;
         }
 
         .day-cycle-dusk {
           background:
-            radial-gradient(ellipse 70% 60% at 30% 50%, rgba(219, 39, 119, 0.06) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 70% at 75% 45%, rgba(124, 58, 237, 0.05) 0%, transparent 55%);
+            radial-gradient(ellipse 70% 60% at 30% 50%, rgba(219, 39, 119, 0.16) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 70% at 75% 45%, rgba(124, 58, 237, 0.12) 0%, transparent 55%);
           animation: cycleDusk 1800s ease-in-out infinite, driftB 48s ease-in-out infinite;
           animation-delay: var(--cycle-offset, 0s), 0s;
         }
 
         .day-cycle-night {
           background:
-            radial-gradient(ellipse 85% 65% at 40% 45%, rgba(30, 27, 75, 0.08) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 80% at 65% 55%, rgba(55, 48, 163, 0.05) 0%, transparent 55%);
+            radial-gradient(ellipse 85% 65% at 40% 45%, rgba(30, 27, 75, 0.19) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 80% at 65% 55%, rgba(55, 48, 163, 0.12) 0%, transparent 55%);
           animation: cycleNight 1800s ease-in-out infinite, driftA 42s ease-in-out infinite;
           animation-delay: var(--cycle-offset, 0s), 0s;
         }
       `}</style>
 
-      {/* Day cycle gradient layers — bloom in as page cascades */}
+      {/* Day cycle gradient layers — bloom initiates the cascade reveal */}
       {(() => {
         const progress = visibleSections / CASCADING_SECTIONS; // 0 → 1
-        const scale = headerComplete ? 0.7 + progress * 0.5 : 0.5; // 0.5 → 0.7 → 1.2
-        const opacity = headerComplete ? 0.1 + progress * 0.9 : 0.04; // barely there → full
-        const yShift = headerComplete ? (1 - progress) * -8 : -15; // starts high (near hero), settles to center
+        // Three phases: dormant → bloom opens (bloomStarted) → sections fill in (progress)
+        let scale, opacity, yShift;
+        if (!bloomStarted) {
+          // Dormant: tiny, hidden, positioned above
+          scale = 0.5;
+          opacity = 0.04;
+          yShift = 15; // starts above, will animate down
+        } else if (visibleSections === 0) {
+          // Bloom phase: gradient sweeps down before content appears
+          scale = 0.85;
+          opacity = 0.35;
+          yShift = 6;
+        } else {
+          // Cascade phase: continues settling down as sections fade in
+          scale = 0.85 + progress * 0.35; // → 1.2
+          opacity = 0.35 + progress * 0.65; // → 1.0
+          yShift = 6 - progress * 6; // → 0
+        }
         return (
           <div
+            ref={driftElRef}
             className="fixed inset-0 pointer-events-none z-0"
             style={{
+              "--drift-x": "0%",
+              "--drift-y": "0%",
               opacity,
-              transform: `scale(${scale}) translateY(${yShift}%)`,
-              transformOrigin: "50% 30%", // bloom from upper area where the hero text lives
-              transition: "opacity 2.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 3s cubic-bezier(0.25, 0.1, 0.25, 1)",
+              transform: `scale(${scale}) translate(calc(${yShift === 0 ? "0%" : "0%"} + var(--drift-x)), calc(${yShift}% + var(--drift-y)))`,
+              transformOrigin: "50% 30%",
+              transition: bloomStarted
+                ? "opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)"
+                : "none",
             }}
           >
             <div className="day-cycle-base day-cycle-morning" />
@@ -809,6 +908,7 @@ export default function DialoguePage() {
               <ProjectLine
                 name="MotionStage"
                 description="Pipeline tooling for motion-capture workflows at ILM."
+                href="/concepts/dialogue/projects/motion-stage"
               />
             </Reveal>
             <Reveal delay={0.15}>
@@ -852,7 +952,7 @@ export default function DialoguePage() {
                 href="https://andrewpaxson.substack.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-8 text-base font-semibold transition-colors duration-300 border-b-2 teal-pulse"
+                className="inline-block mt-8 text-base font-semibold transition-colors duration-[375ms] border-b-2 teal-pulse"
                 style={{
                   fontFamily: "var(--font-overpass-mono)",
                   color: "var(--accent, #0891B2)",
