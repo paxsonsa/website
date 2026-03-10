@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Header from "../components/Header";
-import { GithubCircle, Linkedin, X, Youtube } from "iconoir-react";
+import { GithubCircle, Linkedin, Threads, Youtube } from "iconoir-react";
 
 const credentials = [
   {
@@ -53,9 +53,9 @@ const sections = [
 
 const socialLinks = [
   {
-    href: "https://twitter.com/MrPaxson",
-    label: "X",
-    icon: X,
+    href: "https://www.threads.com/@paxsonsa",
+    label: "Threads",
+    icon: Threads,
   },
   {
     href: "https://github.com/paxsonsa",
