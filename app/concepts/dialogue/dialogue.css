@@ -163,52 +163,6 @@
   100% { background-position: 70% 60%; }
 }
 
-/* Cross-fade keyframes — each layer visible for ~20% of cycle
-   with long overlapping fades. Total cycle: 1800s (30 min). */
-
-@keyframes cycleMorning {
-  0%   { opacity: 1; }
-  15%  { opacity: 1; }
-  25%  { opacity: 0; }
-  85%  { opacity: 0; }
-  95%  { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-@keyframes cycleDay {
-  0%   { opacity: 0; }
-  10%  { opacity: 0; }
-  22%  { opacity: 1; }
-  38%  { opacity: 1; }
-  48%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-@keyframes cycleGolden {
-  0%   { opacity: 0; }
-  33%  { opacity: 0; }
-  43%  { opacity: 1; }
-  55%  { opacity: 1; }
-  65%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-@keyframes cycleDusk {
-  0%   { opacity: 0; }
-  50%  { opacity: 0; }
-  60%  { opacity: 1; }
-  72%  { opacity: 1; }
-  82%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-@keyframes cycleNight {
-  0%   { opacity: 0; }
-  68%  { opacity: 0; }
-  78%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { opacity: 0; }
-}
 
 .day-cycle-base {
   position: absolute;
@@ -216,80 +170,38 @@
   pointer-events: none;
   background-size: 200% 200%;
   transition: background 1.2s ease-out;
+  /* Fix Safari gradient banding — forces GPU rasterization at higher quality */
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* Light mode gradients */
+/* Accent-driven gradient layers — colors sync with --accent-r/g/b from JS */
 .dialogue-page:not(.dark-mode) .day-cycle-morning {
   background:
-    radial-gradient(ellipse 80% 60% at 25% 35%, rgba(96, 165, 250, 0.19) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 70% at 75% 60%, rgba(251, 191, 36, 0.10) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 25% 35%, rgba(var(--accent-r, 8), var(--accent-g, 145), var(--accent-b, 178), 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(var(--accent-r, 8), var(--accent-g, 145), var(--accent-b, 178), 0.07) 0%, transparent 50%);
 }
 .dialogue-page:not(.dark-mode) .day-cycle-day {
   background:
-    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(8, 145, 178, 0.18) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(8, 145, 178, 0.12) 0%, transparent 50%);
-}
-.dialogue-page:not(.dark-mode) .day-cycle-golden {
-  background:
-    radial-gradient(ellipse 75% 55% at 35% 45%, rgba(245, 158, 11, 0.19) 0%, transparent 50%),
-    radial-gradient(ellipse 55% 75% at 70% 55%, rgba(217, 119, 6, 0.12) 0%, transparent 55%);
-}
-.dialogue-page:not(.dark-mode) .day-cycle-dusk {
-  background:
-    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(219, 39, 119, 0.16) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 70% at 75% 45%, rgba(124, 58, 237, 0.12) 0%, transparent 55%);
-}
-.dialogue-page:not(.dark-mode) .day-cycle-night {
-  background:
-    radial-gradient(ellipse 85% 65% at 40% 45%, rgba(30, 27, 75, 0.19) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 65% 55%, rgba(55, 48, 163, 0.12) 0%, transparent 55%);
+    radial-gradient(ellipse 75% 55% at 65% 35%, rgba(var(--accent-r, 8), var(--accent-g, 145), var(--accent-b, 178), 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 75% at 35% 65%, rgba(var(--accent-r, 8), var(--accent-g, 145), var(--accent-b, 178), 0.05) 0%, transparent 50%);
 }
 
-/* Dark mode gradients — subtle glow against dark bg */
 .dialogue-page.dark-mode .day-cycle-morning {
   background:
-    radial-gradient(ellipse 80% 60% at 25% 35%, rgba(96, 165, 250, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 70% at 75% 60%, rgba(60, 130, 246, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 25% 35%, rgba(var(--accent-r, 34), var(--accent-g, 211), var(--accent-b, 238), 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(var(--accent-r, 34), var(--accent-g, 211), var(--accent-b, 238), 0.05) 0%, transparent 50%);
 }
 .dialogue-page.dark-mode .day-cycle-day {
   background:
-    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(34, 211, 238, 0.14) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
-}
-.dialogue-page.dark-mode .day-cycle-golden {
-  background:
-    radial-gradient(ellipse 75% 55% at 35% 45%, rgba(251, 191, 36, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 55% 75% at 70% 55%, rgba(245, 158, 11, 0.07) 0%, transparent 55%);
-}
-.dialogue-page.dark-mode .day-cycle-dusk {
-  background:
-    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(244, 114, 182, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 70% at 75% 45%, rgba(167, 139, 250, 0.08) 0%, transparent 55%);
-}
-.dialogue-page.dark-mode .day-cycle-night {
-  background:
-    radial-gradient(ellipse 85% 65% at 40% 45%, rgba(99, 102, 241, 0.14) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 65% 55%, rgba(139, 92, 246, 0.08) 0%, transparent 55%);
+    radial-gradient(ellipse 75% 55% at 65% 35%, rgba(var(--accent-r, 34), var(--accent-g, 211), var(--accent-b, 238), 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 75% at 35% 65%, rgba(var(--accent-r, 34), var(--accent-g, 211), var(--accent-b, 238), 0.04) 0%, transparent 50%);
 }
 
-/* Shared animation timing for all gradient layers */
+/* Only 2 layers now — drift animation only (no cycle keyframes needed) */
 .day-cycle-morning {
-  animation: cycleMorning 1800s ease-in-out infinite, driftA 45s ease-in-out infinite;
-  animation-delay: var(--cycle-offset, 0s), 0s;
+  animation: driftA 45s ease-in-out infinite;
 }
 .day-cycle-day {
-  animation: cycleDay 1800s ease-in-out infinite, driftB 40s ease-in-out infinite;
-  animation-delay: var(--cycle-offset, 0s), 0s;
-}
-.day-cycle-golden {
-  animation: cycleGolden 1800s ease-in-out infinite, driftA 50s ease-in-out infinite;
-  animation-delay: var(--cycle-offset, 0s), 0s;
-}
-.day-cycle-dusk {
-  animation: cycleDusk 1800s ease-in-out infinite, driftB 48s ease-in-out infinite;
-  animation-delay: var(--cycle-offset, 0s), 0s;
-}
-.day-cycle-night {
-  animation: cycleNight 1800s ease-in-out infinite, driftA 42s ease-in-out infinite;
-  animation-delay: var(--cycle-offset, 0s), 0s;
+  animation: driftB 50s ease-in-out infinite;
 }
