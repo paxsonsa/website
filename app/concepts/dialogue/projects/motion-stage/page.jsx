@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Newsreader, Overpass_Mono } from "next/font/google";
 import { ArrowLeft } from "iconoir-react";
 
@@ -65,9 +66,22 @@ function Reveal({ children, delay = 0 }) {
 }
 
 export default function MotionStagePage() {
+  const router = useRouter();
+  const [pageVisible, setPageVisible] = useState(false);
+  const [pageExiting, setPageExiting] = useState(false);
   const [bloomStarted, setBloomStarted] = useState(false);
   const [contentReady, setContentReady] = useState(false);
   const [visibleSections, setVisibleSections] = useState(0);
+
+  // Fade page in on mount
+  useEffect(() => {
+    requestAnimationFrame(() => setPageVisible(true));
+  }, []);
+
+  const navigateWithFade = useCallback((href) => {
+    setPageExiting(true);
+    setTimeout(() => router.push(href), 500);
+  }, [router]);
 
   // Gradient drift
   const driftRef = useRef({ x: 0, y: 0 });
@@ -201,7 +215,13 @@ export default function MotionStagePage() {
   return (
     <div
       className={`${newsreader.variable} ${overpassMono.variable} min-h-screen`}
-      style={{ backgroundColor: "#FAFAF7", color: "#18181B" }}
+      style={{
+        backgroundColor: "#FAFAF7",
+        color: "#18181B",
+        opacity: pageExiting ? 0 : pageVisible ? 1 : 0,
+        transform: pageExiting ? "translateY(-4px)" : pageVisible ? "translateY(0)" : "translateY(4px)",
+        transition: "opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
+      }}
     >
       <style jsx global>{`
         .project-gradient-base {
@@ -266,19 +286,22 @@ export default function MotionStagePage() {
             transition: "opacity 0.8s ease-out",
           }}
         >
-          <Link
-            href="/concepts/dialogue"
-            className="inline-flex items-center gap-2 text-sm transition-colors duration-[375ms]"
+          <button
+            onClick={() => navigateWithFade("/concepts/dialogue")}
+            className="inline-flex items-center gap-2 text-sm transition-colors duration-[375ms] cursor-pointer"
             style={{
               fontFamily: "var(--font-overpass-mono)",
               color: "#A1A1AA",
+              background: "none",
+              border: "none",
+              padding: 0,
             }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent, #0891B2)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#A1A1AA")}
           >
             <ArrowLeft width={16} height={16} />
             Back
-          </Link>
+          </button>
         </div>
 
         {/* Hero */}
@@ -474,18 +497,21 @@ export default function MotionStagePage() {
         <section className="pb-24 cascade-section" style={cascadeStyle(visibleSections, 5)}>
           <div className="border-t pt-8" style={{ borderColor: "#E4E4E7" }}>
             <div className="flex justify-between items-center">
-              <Link
-                href="/concepts/dialogue"
-                className="text-sm transition-colors duration-[375ms]"
+              <button
+                onClick={() => navigateWithFade("/concepts/dialogue")}
+                className="text-sm transition-colors duration-[375ms] cursor-pointer"
                 style={{
                   fontFamily: "var(--font-overpass-mono)",
                   color: "#A1A1AA",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent, #0891B2)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#A1A1AA")}
               >
                 &larr; All Work
-              </Link>
+              </button>
               <Link
                 href="/concepts/dialogue/projects/motion-stage"
                 className="text-sm transition-colors duration-[375ms]"

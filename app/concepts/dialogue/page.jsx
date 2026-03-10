@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Newsreader, Overpass_Mono } from "next/font/google";
 import { Threads, GithubCircle, Linkedin, Youtube } from "iconoir-react";
 
@@ -118,7 +119,7 @@ function Statement({ text, detail }) {
 
 // --- Project line (tap-friendly for touch devices) ---
 
-function ProjectLine({ name, description, href }) {
+function ProjectLine({ name, description, href, onNavigate }) {
   const [hovered, setHovered] = useState(false);
 
   const inner = (
@@ -159,11 +160,15 @@ function ProjectLine({ name, description, href }) {
     onMouseLeave: () => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); },
   };
 
-  if (href) {
+  if (href && onNavigate) {
     return (
-      <Link href={href} className="block py-4" {...handlers}>
+      <div
+        className="block py-4 cursor-pointer"
+        onClick={(e) => { e.preventDefault(); onNavigate(href); }}
+        {...handlers}
+      >
         {inner}
-      </Link>
+      </div>
     );
   }
 
@@ -314,11 +319,25 @@ const SECTION_STAGGER_MS = 350; // gentle stagger between sections
 
 const CASCADING_SECTIONS = 6; // narrative, what-i-do, work, writing, connect, footer
 
+const ANIM_SEEN_KEY = "dialogue-intro-seen";
+
 export default function DialoguePage() {
-  const [typingDone, setTypingDone] = useState(false);
-  const [bloomStarted, setBloomStarted] = useState(false);
-  const [headerComplete, setHeaderComplete] = useState(false);
-  const [visibleSections, setVisibleSections] = useState(0);
+  const router = useRouter();
+
+  // Skip intro animation if already seen this session (e.g. back from project page)
+  const skipIntro = typeof window !== "undefined" && sessionStorage.getItem(ANIM_SEEN_KEY) === "1";
+
+  const [typingDone, setTypingDone] = useState(skipIntro);
+  const [bloomStarted, setBloomStarted] = useState(skipIntro);
+  const [headerComplete, setHeaderComplete] = useState(skipIntro);
+  const [visibleSections, setVisibleSections] = useState(skipIntro ? CASCADING_SECTIONS : 0);
+  const [pageExiting, setPageExiting] = useState(false);
+
+  // Fade out page, then navigate
+  const navigateWithFade = useCallback((href) => {
+    setPageExiting(true);
+    setTimeout(() => router.push(href), 500);
+  }, [router]);
 
   // Gradient drift — follows mouse (desktop) or scroll (mobile)
   // "Cold honey" — heavy lerp, tiny max offset
@@ -381,28 +400,26 @@ export default function DialoguePage() {
   }, []);
 
   useEffect(() => {
-    const typingTimer = setTimeout(() => {
-      setTypingDone(true);
-    }, TOTAL_INTRO_DELAY_MS);
+    const timers = [];
 
-    // Bloom starts first — gradient opens up as the "reveal"
-    const BLOOM_LEAD_MS = 400; // bloom starts just a beat before content fades in
-    const bloomTimer = setTimeout(() => {
-      setBloomStarted(true);
-    }, HEADER_COMPLETE_MS - BLOOM_LEAD_MS);
+    if (!skipIntro) {
+      timers.push(setTimeout(() => setTypingDone(true), TOTAL_INTRO_DELAY_MS));
 
-    const headerTimer = setTimeout(() => {
-      setHeaderComplete(true);
-    }, HEADER_COMPLETE_MS);
+      const BLOOM_LEAD_MS = 400;
+      timers.push(setTimeout(() => setBloomStarted(true), HEADER_COMPLETE_MS - BLOOM_LEAD_MS));
+      timers.push(setTimeout(() => setHeaderComplete(true), HEADER_COMPLETE_MS));
 
-    // Cascade sections in one by one after header completes
-    // (bloom is already expanding by now, so sections fade in "under" it)
-    const sectionTimers = [];
-    for (let i = 0; i < CASCADING_SECTIONS; i++) {
-      sectionTimers.push(
+      for (let i = 0; i < CASCADING_SECTIONS; i++) {
+        timers.push(
+          setTimeout(() => setVisibleSections((v) => v + 1), HEADER_COMPLETE_MS + (i + 1) * SECTION_STAGGER_MS)
+        );
+      }
+
+      // Mark animation as seen once cascade finishes
+      timers.push(
         setTimeout(() => {
-          setVisibleSections((v) => v + 1);
-        }, HEADER_COMPLETE_MS + (i + 1) * SECTION_STAGGER_MS)
+          sessionStorage.setItem(ANIM_SEEN_KEY, "1");
+        }, HEADER_COMPLETE_MS + CASCADING_SECTIONS * SECTION_STAGGER_MS + 500)
       );
     }
 
@@ -453,10 +470,7 @@ export default function DialoguePage() {
     document.documentElement.style.setProperty("--accent", initialAccent);
 
     return () => {
-      clearTimeout(typingTimer);
-      clearTimeout(bloomTimer);
-      clearTimeout(headerTimer);
-      sectionTimers.forEach(clearTimeout);
+      timers.forEach(clearTimeout);
       clearInterval(accentInterval);
       document.documentElement.style.removeProperty("--accent");
     };
@@ -475,7 +489,13 @@ export default function DialoguePage() {
   return (
     <div
       className={`${newsreader.variable} ${overpassMono.variable} min-h-screen dialogue-page`}
-      style={{ backgroundColor: "#FAFAF7", color: "#18181B" }}
+      style={{
+        backgroundColor: "#FAFAF7",
+        color: "#18181B",
+        opacity: pageExiting ? 0 : 1,
+        transform: pageExiting ? "translateY(-4px)" : "translateY(0)",
+        transition: "opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
+      }}
     >
       {/* ---- keyframes & animations ---- */}
       <style jsx global>{`
@@ -909,6 +929,7 @@ export default function DialoguePage() {
                 name="MotionStage"
                 description="Pipeline tooling for motion-capture workflows at ILM."
                 href="/concepts/dialogue/projects/motion-stage"
+                onNavigate={navigateWithFade}
               />
             </Reveal>
             <Reveal delay={0.15}>
