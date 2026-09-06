@@ -1,0 +1,63 @@
+---
+# PROJECT STORY TEMPLATE
+# Copy this file to /stories/<slug>.mdx. The slug becomes the URL: /work/<slug>.
+# Bracketed text is placeholder. Remove `draft: true` when the story is ready.
+
+title: "[Project name]"
+kind: project            # project | product
+visibility: public       # public | nda
+status: in-progress      # in-progress | published
+draft: true              # true: unlisted (unlinked card, noindex page, no Next link)
+featured: false          # true: appears under "Selected work" on the home page
+order: 99                # ascending sort on the work index
+year: "[YEAR]"
+role: "[Design + engineering, solo, lead...]"
+timeline: "[START] – [END]"
+stack: ["[Language]", "[Framework]", "[Format]"]
+links:
+  - label: Repository
+    href: "https://github.com/paxsonsa/[repo]"
+summary: "[One sentence for cards: what it is and who it is for.]"
+dek: "[Two sentences for the story header: the problem in one, the thing you built in the other.]"
+image: null              # e.g. /img/project-hero.webp (1536×864)
+imageCaption: null
+next: null               # slug of the story to link as "Next"
+---
+
+## Context
+
+[Two or three paragraphs. Where this project came from, who needed it, and what the
+situation was before it existed. Lead with the people and the pressure, not the stack.]
+
+## My role
+
+[What you owned, what you built, who you worked with. Be specific about the parts
+you wrote versus directed.]
+
+## Approach
+
+[How you got from the problem to the design. Research, the principles that came out
+of it, and the first thing you shipped.]
+
+## Technical decisions
+
+[One paragraph per decision: what was chosen, the alternative considered, and the
+constraint that settled it. Link to the file or module in the repository.]
+
+<Figure alt="[Figure: architecture diagram]" caption="[Caption]" ratio="2 / 1" />
+
+```python
+# Code samples render with the existing highlight.js Catppuccin theme.
+def route_take(take: Take) -> Job:
+    ...
+```
+
+## Outcomes
+
+<Outcomes>
+  <Outcome value="[XX%]" label="[what got faster]" />
+  <Outcome value="[Nx]" label="[what got more frequent]" />
+  <Outcome value="Zero" label="[what stopped happening]" />
+</Outcomes>
+
+[What changed for the people using it, and what you would do differently.]

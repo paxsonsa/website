@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { GithubCircle, Linkedin, X, Youtube } from "iconoir-react";
+import { GithubCircle, Linkedin, Threads, Youtube } from "iconoir-react";
 
 export default function Footer() {
   return (
@@ -9,9 +9,9 @@ export default function Footer() {
         <div className="flex justify-center space-x-4">
           <Link
             className="p-2 hover:bg-zinc-800 hover:text-zinc-100 dark:text-neutral-400 dark:hover:bg-neutral-800 rounded"
-            href="https://twitter.com/MrPaxson"
+            href="https://www.threads.com/@paxsonsa"
           >
-            <X />
+            <Threads />
           </Link>
           <Link
             className="p-2 hover:bg-zinc-800 dark:text-neutral-400 dark:hover:bg-neutral-800 hover:text-zinc-100 rounded"

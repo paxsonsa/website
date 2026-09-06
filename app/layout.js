@@ -1,12 +1,12 @@
 import "./globals.css";
-import Header from "@/components/Header";
 
 import Link from "next/link";
 
 export const metadata = {
   metadataBase: new URL("https://andrewpaxson.com"),
   title: "🕹️ Andrew Paxson",
-  description: "I like to make things for creative people.",
+  description:
+    "Product designer and software engineer building practical tools for creative teams.",
 };
 
 export default function RootLayout({ children }) {
@@ -16,14 +16,14 @@ export default function RootLayout({ children }) {
         <main className="flex-row justify-center items-center mb-auto">
           {children}
         </main>
-        <footer className="w-full text-sm p-4 mb-2 flex-row justify-center m-auto text-center text-neutral-400">
-          <p>© 2024 Andrew Paxson</p>
-          <p>This website was made with ♥️ using next.js and tailwindcss.</p>
+        <footer className="w-full text-sm p-4 mb-2 flex-row justify-center m-auto text-center text-neutral-500">
+          <p>© 2026 Andrew Paxson</p>
+          <p>Built with Next.js and Tailwind CSS.</p>
           <Link
             className="font-medium hover:underline"
             href="https://github.com/paxsonsa/website"
           >
-            Check out the code here
+            Source on GitHub
           </Link>
         </footer>
       </body>

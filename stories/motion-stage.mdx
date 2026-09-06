@@ -1,0 +1,61 @@
+---
+title: MotionStage
+kind: project
+visibility: public
+status: in-progress
+draft: true
+featured: true
+order: 1
+year: "2025"
+role: Product design and engineering
+timeline: "[START] – [END]"
+stack: [Python, React, USD, WebSockets]
+links:
+  - label: Repository
+    href: "https://github.com/paxsonsa"
+summary: Pipeline tooling for motion-capture review, with the repository artifacts that show the architecture and implementation choices.
+dek: "Pipeline tooling for motion-capture workflows at Industrial Light & Magic: a real-time review environment that connects the capture stage to the rest of the pipeline."
+image: null
+imageCaption: "[Caption: what the reader is looking at and why it matters]"
+next: pelagodb
+---
+
+## Context
+
+Motion-capture sessions at ILM generate terabytes of data per day. Artists needed
+a way to review, tag, and route takes through the production pipeline without
+losing context or time.
+
+MotionStage is the tool I designed and built to solve that: a real-time review
+environment that connects the capture stage to the rest of the pipeline.
+
+## My role
+
+Led product design from research through shipped software. Wrote the core pipeline
+integration layer in Python and built the review UI in React with real-time
+WebSocket updates. Coordinated with mocap supervisors and pipeline TDs to validate
+workflows.
+
+## Approach
+
+I started with two weeks of on-stage observation, mapping the workflow artists
+actually used against the one we assumed. The gap was significant. From there the
+design focused on three principles: zero-click context, live data, and
+pipeline-native output.
+
+## Technical decisions
+
+[One paragraph per decision: what was chosen, the alternative considered, and the
+constraint that settled it. Link the relevant file or module in the repository.]
+
+<Figure alt="[Figure: architecture diagram]" caption="[Caption]" ratio="2 / 1" />
+
+## Outcomes
+
+<Outcomes>
+  <Outcome value="[XX%]" label="reduction in take-review turnaround" />
+  <Outcome value="[Nx]" label="more takes tagged per session" />
+  <Outcome value="Zero" label="manual file transfers after deployment" />
+</Outcomes>
+
+[What changed for the people using it, and what you would do differently.]
