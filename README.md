@@ -20,6 +20,15 @@ This is the repo for my personal website.
 > npm run build
 ```
 
+## Structure
+
+- `app/layout.js` loads the fonts (Newsreader, Overpass Mono), sets the theme class before
+  paint, and wraps every page in `components/site/SiteShell.jsx` (gradient bloom, nav,
+  theme toggle, fade navigation).
+- `components/site/SiteContext.jsx` holds theme, accent-color cycle, bloom phase, and the
+  fade navigation used by `TransitionLink`.
+- Design tokens and the prose styles live in `app/globals.css`.
+
 ## Content
 
 - `posts/` — articles, rendered at `/articles/<slug>`.

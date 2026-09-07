@@ -4,15 +4,9 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 
 import "@/styles/highlightjs/catppuccin-mocha.css";
-import Header from "@/components/Header";
-import {
-  BackLink,
-  Figure,
-  StoryHeader,
-  StoryNav,
-  storyComponents,
-} from "@/components/story";
-import { getStories, getStory, storyEyebrow } from "@/lib/stories";
+import StoryPage from "@/components/site/StoryPage";
+import { mdxComponents } from "@/components/site/mdx";
+import { getStories, getStory } from "@/lib/stories";
 
 const options = {
   mdxOptions: {
@@ -38,40 +32,18 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function StoryPage({ params }) {
+export default async function Story({ params }) {
   const { slug } = await params;
   const story = getStory(slug);
   if (!story) notFound();
 
-  const next = story.next ? getStory(story.next) : null;
+  const { content, ...meta } = story;
+  const nextStory = story.next ? getStory(story.next) : null;
+  const next = nextStory && !nextStory.draft ? { slug: nextStory.slug, title: nextStory.title } : null;
 
   return (
-    <>
-      <Header sticky />
-      <article className="mx-auto w-full max-w-[52rem] px-6 pt-8 md:px-8 md:pt-10">
-        <BackLink />
-        <StoryHeader story={story} eyebrow={storyEyebrow(story)} />
-
-        {story.image || story.imageCaption ? (
-          <div className="mt-10">
-            <Figure
-              src={story.image}
-              alt={story.image ? story.title : "[Hero image]"}
-              caption={story.imageCaption}
-            />
-          </div>
-        ) : null}
-
-        <div className="prose prose-neutral mt-12 max-w-3xl prose-headings:font-semibold prose-h2:mt-12 prose-h2:text-2xl prose-p:leading-7 dark:prose-invert dark:prose-p:text-neutral-200">
-          <MDXRemote
-            source={story.content}
-            options={options}
-            components={storyComponents}
-          />
-        </div>
-
-        <StoryNav next={next && !next.draft ? next : null} />
-      </article>
-    </>
+    <StoryPage story={meta} next={next}>
+      <MDXRemote source={content} options={options} components={mdxComponents} />
+    </StoryPage>
   );
 }

@@ -1,15 +1,13 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-
-import Link from "next/link";
+import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 
 import "@/styles/highlightjs/catppuccin-mocha.css";
-import Header from "@/components/Header";
-import Subheader from "@/components/Subheader";
+import { ArticlePage } from "@/components/site/ArticlesPage";
+import { mdxComponents } from "@/components/site/mdx";
+import { formatDate, getPost } from "@/lib/posts";
+import fs from "fs";
 
 const options = {
   mdxOptions: {
@@ -19,93 +17,34 @@ const options = {
 };
 
 export async function generateStaticParams() {
-  const files = fs.readdirSync(path.join("posts"));
-  const paths = files
-    .filter((filename) => filename.endsWith(".mdx"))
-    .map((filename) => ({
-      slug: filename.replace(".mdx", ""),
-    }));
-
-  return paths;
-}
-
-function getPost({ slug }) {
-  const source = fs.readFileSync(path.join("posts", `${slug}.mdx`), "utf-8");
-  const { data, content } = matter(source);
-  return {
-    frontMatter: data,
-    slug,
-    content,
-  };
+  // Hidden posts still build so old links keep working; they are just unlisted.
+  return fs
+    .readdirSync("posts")
+    .filter((name) => name.endsWith(".mdx"))
+    .map((name) => ({ slug: name.replace(/\.mdx$/, "") }));
 }
 
 export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const blog = getPost(resolvedParams);
+  const { slug } = await params;
+  const post = getPost(slug);
+  if (!post) return {};
   return {
-    metadataBase: new URL('https://andrewpaxson.com'),
-    title: `${blog.frontMatter.title}`,
-    author: "Andrew Paxson @MrPaxson",
-    description: blog.frontMatter.description,
-    openGraph: {
-      images: `/${blog.frontMatter.image}`
-    },
+    title: `${post.title} · Andrew Paxson`,
+    description: post.description,
+    openGraph: post.image ? { images: post.image } : undefined,
+    robots: post.hidden ? { index: false, follow: false } : undefined,
   };
 }
 
-export default async function Page({ params }) {
-  const resolvedParams = await params;
-  const props = getPost(resolvedParams);
+export default async function Article({ params }) {
+  const { slug } = await params;
+  const post = getPost(slug);
+  if (!post) notFound();
 
-  const date = new Date(props.frontMatter.date);
-  const options = { year: "numeric", month: "short", day: "2-digit" };
-  const formattedDate = date.toLocaleDateString("en-US", options);
-
+  const { content, ...meta } = post;
   return (
-    <>
-      <title>{props.frontMatter.title}</title>
-      <meta name="title" content={props.frontMatter.title} />
-      <meta name="description" content={props.frontMatter.description} />
-
-      <Header />
-      <Subheader title="Articles & Posts" href="/articles" />
-      <div className="bg-white dark:bg-black justify-center p-4 pb-16 border-b border-b-neutral-200">
-        <article className="max-w-screen-md m-auto pt-8">
-          <h2 className="text-2xl font-medium">{props.frontMatter.title}</h2>
-          <h3 className="text-sm text-neutral-500 dark:text-neutral-400 mt-1 mb-4 dark:mb-8">
-            {formattedDate}
-          </h3>
-          <HeroImage imageUrl={props.frontMatter.image} imageCaption={props.frontMatter.imageCaption} />
-          <div className="prose prose-neutral dark:prose-invert dark:prose-p:text-neutral-50">
-            <MDXRemote source={props.content} options={options} />
-          </div>
-        </article>
-        <div className="md:max-w-screen-md flex justify-start my-8 space-x-8 m-auto">
-          <Link
-            className="hover:underline rounded text-sky-500 dark:text-sky-400 dark:hover:no-underline dark:hover:text-sky-500 font-semibold"
-            href="/articles"
-          >
-            See All Articles
-          </Link>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function HeroImage({ imageUrl, imageCaption = null }) {
-  if (!imageUrl) {
-    return null;
-  }
-
-  return (
-    <div className="md:pr-16 mb-4 dark:mb-8">
-      <img
-        className="object-cover rounded-2xl"
-        src={imageUrl}
-        alt="Hero Image"
-      />
-      { imageCaption ? <span className="text-neutral-500 italic text-xs">{imageCaption}</span> : null }
-    </div>
+    <ArticlePage post={{ ...meta, dateLabel: formatDate(post.date) }}>
+      <MDXRemote source={content} options={options} components={mdxComponents} />
+    </ArticlePage>
   );
 }
